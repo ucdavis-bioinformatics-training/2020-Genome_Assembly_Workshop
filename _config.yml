@@ -1,5 +1,5 @@
 theme: jekyll-theme-minimal
-title: 'UC Davis Bioinformatics Workshop Base Template'
+title: 'Genome Assembly Workshop 2020'
 show_downloads: True
 google_analytics: True
 navigation:
@@ -9,5 +9,7 @@ navigation:
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: welcome
+  - title: Schedule
+    url: schedule
   - title: Examples of Markdown Formatting
     url: examples
