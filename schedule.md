@@ -10,7 +10,7 @@ All times are PDT / UTC-07:00
 
 ### Monday, June 20
 
-**8:50** Zoom session starts
+**8:50** Zoom session starts  
 **5:00** Zoom session ends
 
 ### Tuesday, June 21
@@ -40,4 +40,3 @@ All times are PDT / UTC-07:00
 ## Register
 
 https://registration.genomecenter.ucdavis.edu/events/genome_assembly_2020/
-
