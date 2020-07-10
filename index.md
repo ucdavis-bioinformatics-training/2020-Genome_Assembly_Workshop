@@ -1,5 +1,5 @@
 Bioinformatics: Genome Assembly Workshop @ UC Davis  
-Jun. 29, 2019, 9 a.m. - Jul. 02, 2019, 4:30 p.m.  
+Jul. 20, 2019, 9 a.m. - Jul. 23, 2019, 4:30 p.m.  
 Organizer - Bioinformatics Core  
 Contact - UC Davis Bioinformatics Core, training.bioinformatics@ucdavis.edu
 
@@ -7,7 +7,7 @@ Genome Assembly is currently in a renaissance, with new technologies coming toge
 
 The format will be approximately half lecture and half hands-on. The hands-on portion of the workshop will  involve command-line interaction with some R, therefore prior command-line and R experience is a must to fully participate. If you are not familiar with the command line but would like to attend, listen, and learn that is OK, but we will be unable to train you in how to use the command-line and R during this workshop.
 
-This workshop will be held in Davis and will run from 9:00am to 5:00pm each day and include light breakfast, lunch, and snacks.
+This workshop will be held remotely over Zoom and Slack and will run from 9:00am to 5:00pm each day.
 
 Participants must bring their own laptops to use, which should have a recent version of R, Rstudio, and Java installed, and an application that allows them to ssh into a server (e.g. Bash for Windows, or Terminal for Apple), as well as the ability to connect to the internet via wifi.
 
