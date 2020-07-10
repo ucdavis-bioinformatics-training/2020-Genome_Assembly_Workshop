@@ -13,3 +13,8 @@ navigation:
     url: schedule
   - title: Examples of Markdown Formatting
     url: examples
+
+  - heading: ONT Assembly
+  - title: Assembly using ONT - Hands-on
+    url: ONT_Assembly/nanopore.md
+
