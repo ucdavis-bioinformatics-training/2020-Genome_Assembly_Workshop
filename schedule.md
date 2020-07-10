@@ -1,9 +1,3 @@
-Bioinformatics: Genome Assembly Workshop @ UC Davis  
-Jul. 20, 2019, 9 a.m. - Jul. 23, 2019, 4:30 p.m.  
-Organizer - Bioinformatics Core  
-Contact - UC Davis Bioinformatics Core, training.bioinformatics@ucdavis.edu
-Participants must bring their own laptops to use, which should have a recent version of R, Rstudio, and Java installed, and an application that allows them to ssh into a server (e.g. Bash for Windows, or Terminal for Apple), as well as the ability to connect to the internet via wifi.
-
 ## Schedule
 
 All times are PDT / UTC-07:00
