@@ -9,7 +9,7 @@ output:
 
 ### Just a reminder of the overall workflow.
 
-![](./wf.png)
+![](wf.png)
 
 
 **1\.** Let's create the working directory and get the raw sequencing data. 
