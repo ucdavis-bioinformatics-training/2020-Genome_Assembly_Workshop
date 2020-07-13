@@ -14,5 +14,5 @@ navigation:
 
   - heading: ONT Assembly
   - title: Assembly using ONT - Hands-on
-    url: ONT_Assembly/nanopore.md
+    url: ONT_Assembly/nanopore
 
