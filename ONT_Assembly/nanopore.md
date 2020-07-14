@@ -44,7 +44,7 @@ I always like to have a separate directory where I keep all of my scripts for ru
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_nanoplot.slurm .
 
-This [run_nanoplot.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_nanoplot.slurm) script will submit a job to run nanoplot on the raw Oxford Nanopore sequencing data we have. The command to submit this script is as following.
+This [run_nanoplot.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_nanoplot.slurm) script will submit a job to run nanoplot on the raw Oxford Nanopore sequencing data we have. The command to submit this script is as following.
 
     sbatch -J nnp.${USER} run_nanoplot.slurm BQC
 
