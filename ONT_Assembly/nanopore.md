@@ -44,7 +44,7 @@ I always like to have a separate directory where I keep all of my scripts for ru
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_nanoplot.slurm .
 
-This [run_nanoplot.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_nanoplot.sh) script will submit a job to run nanoplot on the raw Oxford Nanopore sequencing data we have. The command to submit this script is as following.
+This [run_nanoplot.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_nanoplot.slurm) script will submit a job to run nanoplot on the raw Oxford Nanopore sequencing data we have. The command to submit this script is as following.
 
     sbatch -J nnp.${USER} run_nanoplot.slurm BQC
 
@@ -52,33 +52,35 @@ After the job has been executed successfully, you should have a file named "BQCN
 
 ---
 
-**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use porechop.
+**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use porechop ([link to github porechop](https://github.com/rrwick/Porechop)). Porechop removes sequencing adapters. If the adapter sequences are found in the middle of a read, indicating a chimera, the read is split. If one wants to use Nanopolish ([link to nanopolish github](https://github.com/jts/nanopolish)) to do polish later on, then the option "--discard_middle" should be used. In today's exercise, we do not use this option. We are going to use [run_porechop.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_porechop.slurm) script to carry out this step.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_porechop.slurm .
-    sbatch -J pcp.${USER} run_porechop.sh
+    sbatch -J pcp.${USER} run_porechop.slurm
+
+After qc, one might want to run NanoPlot again (use [run_nanoplot_qc.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_nanoplot_qc.slurm)) to check how the quality of the data has changed.
+
+    cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_nanoplot_qc.slurm .
+    sbatch -J anp.${USER} run_nanoplot_qc.slurm AQC
+   
+After the job has been executed successfully, you should have a file named "AQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to the one I have generated [NPAlink](AQCNanoPlot-report.html). When comparing to the NanoPlot report generated on raw sequencing reads, there is very small changes in our case.
 
 ---
 
-**4\.** The next step is to filter the raw sequencing reads. From the NanoPlot report, we are going to remove reads that are shorter than 3000bp and have a mean base quality less than 10. In choosing these two cutoff values, one should also keep in mind the size of the genome and a desired minimum coverage. We are going to use a package called Filtlong to accomplish this task. Filtlong was designed to filter long noisy sequencing data.
+**4\.** Now that the raw sequencing data has gone through the quality control, we can start the assembly. There are many assembly packages designed for long noisy sequencing data. We are going to use one of them: Shasta, to generate the draft assembly. I am going to provide the script for running a second assembly package: Canu. However, because it requires a very long time to run Canu, we are not going to actually run it. I will provide the assembly result that I generated using the script.
 
-    cp /share/workshop/jli/Nanopore/02-Cleaned/run_filtlong.sh .
-    sbatch -J ftl.jli run_filtlong.sh
+    cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_shasta.slurm .
 
-After the above two steps of quality control, one may want to check the quality of the filtered data again. You can run NanoPlot on the filtered data. I will leave that to you as an exercise.
+**If your previous step has finished properly**, then please run the following command to submit the script for assembly job.
 
----
-
-**5\.** Now that the raw sequencing data has gone through all the quality control, we can start the assembly. There are many assembly packages designed for long noisy sequencing data. I am going to go through two of them: canu and miniasm. We are going to use canu first. It is a tool that error correct the raw sequencing reads first, to create high accuracy data for down stream assembly. In running canu, there are two main parameters we can set that will affect the assembly quite a lot. One is the minimum length of reads that will be used in the assembly (minReadLength). The other is the minimum overlap length that will be saved (minOverlapLength).
-
-    cd ../03-Canu-Lambda
-    cp /share/workshop/jli/Nanopore/03-Canu-Lambda/run_canu.sh .
-
-In order to run the following command, please change the last argument "jli" to your user name, which will tell the script to run everything in your directory.
-
-    sbatch -J canu.jli run_canu.sh jli
+    sbatch -J canu.${USER} run_shasta.slurm
 
 
-Because of the error correction step, canu runs much slower than other packages that do not include the error correction step.
+**If your previous step has not finished properly**, then please run the following command to submit the script for assembly job. This will allow the script to link the fastq files that I have generated with a successful run of the quality control step.
+
+    sbatch -J canu.${USER} run_shasta.slurm NO
+
+
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
 
 ---
 
