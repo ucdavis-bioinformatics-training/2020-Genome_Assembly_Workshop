@@ -40,7 +40,7 @@ I always like to have a separate directory where I keep all of my scripts for ru
 
 ---
 
-**2\.** After obtaining the raw sequencing data and before starting an assembly, it's best to look at the raw data and know what quality of data one has in hand. The information one gets from looking at the raw data will help to make decision on the parameters in downstream analysis, or whether more data/better data should be generated. Fortunately, there is a very nice tool that one can use - NanoPlot ([link to github](https://github.com/wdecoster/NanoPlot)). NanoPlot can take fastq files as input, or the sequencing_summary.txt file generated at the end of the sequencing run. We are going to copy the script to your scripts directory.
+**2\.** After obtaining the raw sequencing data and before starting an assembly, it's best to look at the raw data and know what quality of data one has in hand. The information one gets from looking at the raw data will help to make decision on the parameters in downstream analysis, or whether more data/better data should be generated. Fortunately, there is a very nice tool that one can use - [NanoPlot](https://github.com/wdecoster/NanoPlot). NanoPlot can take fastq files as input, or the sequencing_summary.txt file generated at the end of the sequencing run. We are going to copy the script to your scripts directory.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_nanoplot.slurm .
 
