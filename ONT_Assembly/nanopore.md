@@ -80,7 +80,9 @@ After the job has been executed successfully, you should have a file named "AQCN
     sbatch -J canu.${USER} run_shasta.slurm NO
 
 
-The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could modify. One of the first parameters that we could play with is the length of the marker kmers (\-\-Kmers.k).
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could modify. One of the first parameters that we could play with is the length of the marker kmers (\-\-Kmers.k). Please note that the default value for parameter "\-\-Reads.minReadLength" is 10000, which means that any read that is less than 10000 will be ignored during the assembly process. If one would like to include shorter reads in the assembly, then this parameter has to be changed.
+
+I have generated three assemblies using Shasta, with the "\-\-Kmers.k" set as the default (10), 12 and 8, as well as one assembly using Canu with default parameters. The results are summarized in this [report](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/report.nb.html).
 
 ---
 
