@@ -70,17 +70,17 @@ After the job has been executed successfully, you should have a file named "AQCN
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_shasta.slurm .
 
-**If your previous step has finished properly**, then please run the following command to submit the script for assembly job.
+**If your quality control step has finished properly**, then please run the following command to submit the script for assembly job.
 
     sbatch -J canu.${USER} run_shasta.slurm
 
 
-**If your previous step has not finished properly**, then please run the following command to submit the script for assembly job. This will allow the script to link the fastq files that I have generated with a successful run of the quality control step.
+**If your quality control step has not finished properly**, then please run the following command to submit the script for assembly job. This will allow the script to link the fastq files that I have generated with a successful run of the quality control step.
 
     sbatch -J canu.${USER} run_shasta.slurm NO
 
 
-The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
 
 ---
 
