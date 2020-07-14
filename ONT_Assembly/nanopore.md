@@ -48,25 +48,25 @@ This [run_nanoplot.slurm](https://raw.githubusercontent.com/ucdavis-bioinformati
 
     sbatch -J nnp.${USER} run_nanoplot.slurm BQC
 
-After the job has been executed successfully, you should have a file named "BQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to the one I have generated [NPBlink](BQCNanoPlot-report.html). This report shows a few main quality metrics of our raw sequencing data, such as the mean read length, the median read length, the total bases yield.
+After the job has been executed successfully, you should have a file named "BQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to the [report](BQCNanoPlot-report.html) I have generated. This report shows a few main quality metrics of our raw sequencing data, such as the mean read length, the median read length, the total bases yield.
 
 ---
 
-**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use porechop ([link to github porechop](https://github.com/rrwick/Porechop)). Porechop removes sequencing adapters. If the adapter sequences are found in the middle of a read, indicating a chimera, the read is split. If one wants to use Nanopolish ([link to nanopolish github](https://github.com/jts/nanopolish)) to do polish later on, then the option "--discard_middle" should be used. In today's exercise, we do not use this option. We are going to use [run_porechop.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_porechop.slurm) script to carry out this step.
+**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use [porechop](https://github.com/rrwick/Porechop). Porechop removes sequencing adapters. If the adapter sequences are found in the middle of a read, indicating a chimera, the read is split. If one wants to use [Nanopolish](https://github.com/jts/nanopolish) to do the polish later on, then the option "--discard_middle" should be used. In today's exercise, we do not use this option. We are going to use [run_porechop.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_porechop.slurm) script to carry out this step.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_porechop.slurm .
     sbatch -J pcp.${USER} run_porechop.slurm
 
-After qc, one might want to run NanoPlot again (use [run_nanoplot_qc.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/run_nanoplot_qc.slurm)) to check how the quality of the data has changed.
+After qc, one might want to run NanoPlot again (use [run_nanoplot_qc.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_nanoplot_qc.slurm)) to check how the quality of the data has changed.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_nanoplot_qc.slurm .
     sbatch -J anp.${USER} run_nanoplot_qc.slurm AQC
    
-After the job has been executed successfully, you should have a file named "AQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to the one I have generated [NPAlink](AQCNanoPlot-report.html). When comparing to the NanoPlot report generated on raw sequencing reads, there is very small changes in our case.
+After the job has been executed successfully, you should have a file named "AQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to [the one](AQCNanoPlot-report.html) I have generated. When comparing to the NanoPlot report generated on raw sequencing reads, there is very small changes in our case.
 
 ---
 
-**4\.** Now that the raw sequencing data has gone through the quality control, we can start the assembly. There are many assembly packages designed for long noisy sequencing data. We are going to use one of them: Shasta, to generate the draft assembly. I am going to provide the script for running a second assembly package: Canu. However, because it requires a very long time to run Canu, we are not going to actually run it. I will provide the assembly result that I generated using the script.
+**4\.** Now that the raw sequencing data has gone through the quality control, we can start the assembly. There are many assembly packages designed for long noisy sequencing data. We are going to use one of them: [Shasta](https://github.com/chanzuckerberg/shasta), to generate the draft assembly. I am going to provide the script for running a second assembly package: [Canu](https://canu.readthedocs.io/en/latest/). However, because it requires a very long time to run Canu, we are not going to actually run it. I will provide the assembly result that I generated by Canu. Let's get [run_shasta.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_shasta.slurm).
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_shasta.slurm .
 
@@ -80,7 +80,7 @@ After the job has been executed successfully, you should have a file named "AQCN
     sbatch -J canu.${USER} run_shasta.slurm NO
 
 
-The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/ONT/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
 
 ---
 
