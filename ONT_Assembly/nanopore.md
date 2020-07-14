@@ -52,7 +52,7 @@ After the job has been executed successfully, you should have a file named "BQCN
 
 ---
 
-**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use [porechop](https://github.com/rrwick/Porechop). Porechop removes sequencing adapters. If the adapter sequences are found in the middle of a read, indicating a chimera, the read is split. If one wants to use [Nanopolish](https://github.com/jts/nanopolish) to do the polish later on, then the option "--discard_middle" should be used. In today's exercise, we do not use this option. We are going to use [run_porechop.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_porechop.slurm) script to carry out this step.
+**3\.** Once we know the quality of our sequencing data and know that we have sufficient data for assembly, we are going to apply some quality control: to remove any adpters from the reads. For Nanopore data, we use [porechop](https://github.com/rrwick/Porechop). Porechop removes sequencing adapters. If the adapter sequences are found in the middle of a read, indicating a chimera, the read is split. If one wants to use [Nanopolish](https://github.com/jts/nanopolish) to do the polish later on, then the option "\-\-discard_middle" should be used. In today's exercise, we do not use this option. We are going to use [run_porechop.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_porechop.slurm) script to carry out this step.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run_porechop.slurm .
     sbatch -J pcp.${USER} run_porechop.slurm
@@ -80,7 +80,7 @@ After the job has been executed successfully, you should have a file named "AQCN
     sbatch -J canu.${USER} run_shasta.slurm NO
 
 
-The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could change. One of the first parameters that we could play with is the kmer size 
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could modify. One of the first parameters that we could play with is the length of the marker kmers (\-\-Kmers.k).
 
 ---
 
