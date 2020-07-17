@@ -5,7 +5,8 @@
 #SBATCH --ntasks=16 # Number of cores
 #SBATCH --mem=50000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # Partition to submit to
-#SBATCH --reservation=jli.assembly.test
+#SBATCH --reservation=genome_workshop
+#SBATCH --account=genome_workshop
 #SBATCH --output=slurmout/anp-%N-%j.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/anp-%N-%j.err # File to which STDERR will be written
 

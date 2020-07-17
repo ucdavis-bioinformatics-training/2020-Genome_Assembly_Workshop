@@ -6,7 +6,8 @@
 #SBATCH --ntasks=4 # Number of cores
 #SBATCH --mem=10000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # Partition to submit to
-#SBATCH --reservation=jli.assembly.test
+#SBATCH --reservation=genome_workshop
+#SBATCH --account=genome_workshop
 #SBATCH --output=slurmout/pc-%A-%a.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/pc-%A-%a.err # File to which STDERR will be written
 
@@ -25,7 +26,7 @@ then
   mkdir -p $outP
 fi
 
-READS=`head -n ${SLURM_ARRAY_TASK_ID} input.fofn | tail -1`
+READS=`head -n ${SLURM_ARRAY_TASK_ID} raw.input.fofn | tail -1`
 echo $READS
 
 

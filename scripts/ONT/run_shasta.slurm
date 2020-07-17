@@ -2,10 +2,11 @@
 #
 #SBATCH --nodes=1
 #SBATCH --time=3-0
-#SBATCH --ntasks=32 # Number of cores
-#SBATCH --mem=200000 # Memory pool for all cores (see also --mem-per-cpu)
+#SBATCH --ntasks=48 # Number of cores
+#SBATCH --mem=400000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # Partition to submit to
-#SBATCH --reservation=jli.assembly.test
+#SBATCH --reservation=genome_workshop
+#SBATCH --account=genome_workshop
 #SBATCH --output=slurmout/sta-%N-%j.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/sta-%N-%j.err # File to which STDERR will be written
 
@@ -27,10 +28,11 @@ finished=$1
 
 if [ $finished == "NO" ]
 then
-  ln -s /share/workshop/genome_assembly/jli/Nanopore/02-QC /share/workshop/genome_assembly/${USER}/Nanopore/02-QC-Linked
-  export fastq=$baseP/02-QC-Linked
+  export fastqP=$baseP/02-QC-Linked
+  mkdir -p $fastqP
+  ln -s /share/workshop/genome_assembly/jli/Nanopore/02-QC/* /share/workshop/genome_assembly/${USER}/Nanopore/02-QC-Linked/
 else
-  export fastq=$baseP/02-QC
+  export fastqP=$baseP/02-QC
 fi
 
 

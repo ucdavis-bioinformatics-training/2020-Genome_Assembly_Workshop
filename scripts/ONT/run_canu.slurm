@@ -5,6 +5,8 @@
 #SBATCH --ntasks=2 # Number of cores
 #SBATCH --mem=10g # total memory required
 #SBATCH --partition=production # Partition to submit to
+#SBATCH --reservation=genome_workshop
+#SBATCH --account=genome_workshop
 #SBATCH --output=slurmout/cn-%N-%j.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/cn-%N-%j.err # File to which STDERR will be written
 
