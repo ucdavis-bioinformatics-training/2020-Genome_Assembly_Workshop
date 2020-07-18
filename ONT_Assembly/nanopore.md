@@ -63,7 +63,7 @@ After qc, one might want to run NanoPlot again (use [run_nanoplot_qc.slurm](http
     cp /share/workshop/genome_assembly/jli/Nanopore/scripts/run.scripts/run_nanoplot_qc.slurm .
     sbatch -J anp.${USER} run_nanoplot_qc.slurm AQC
    
-After the job has been executed successfully, you should have a file named "AQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to [the one](AQCNanoPlot-report.html) I have generated. When comparing to the NanoPlot report generated on raw sequencing reads, there is very small changes in our case.
+After the job has been executed successfully, you should have a file named "AQCNanoPlot-report.html" in your 01-Nanoplot directory. It should look similar to [the one](AQCNanoPlot-report.html) I have generated. When comparing to the NanoPlot report generated on raw sequencing reads, there is very little change in our case.
 
 ---
 
@@ -81,7 +81,7 @@ After the job has been executed successfully, you should have a file named "AQCN
     sbatch -J sta.${USER} run_shasta.slurm NO
 
 
-The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could modify. One of the first parameters that we could play with is the length of the marker kmers (\-\-Kmers.k). Please note that the default value for parameter "\-\-Reads.minReadLength" is 10000, which means that any read that is less than 10000 will be ignored during the assembly process. If one would like to include shorter reads in the assembly, then this parameter has to be changed. A full description of method used in Shasta for assembly is provided by the Shasta team and can be found [here](https://chanzuckerberg.github.io/shasta/ComputationalMethods.html#Markers).
+The script that we just submitted uses the default parameters from shasta package. There are many [parameters](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/ONT_Assembly/parms.shasta) one could modify. One of the first parameters that we could play with is the length of the marker kmers (\-\-Kmers.k). Please note that the default value for parameter "\-\-Reads.minReadLength" is 10000, which means that any read that is less than 10000 will be ignored during the assembly process. If one would like to include shorter reads in the assembly, then this parameter has to be changed. A full description of method used in Shasta for assembly is provided by the Shasta team and can be found [here](https://chanzuckerberg.github.io/shasta/ComputationalMethods.html).
 
 I have generated three assemblies using Shasta, with the "\-\-Kmers.k" set as the default (10), 12 and 8, as well as one assembly using Canu with default parameters. The results are summarized in this [report](report.nb.html).
 
