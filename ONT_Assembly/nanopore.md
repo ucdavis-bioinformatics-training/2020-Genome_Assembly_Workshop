@@ -85,7 +85,7 @@ The script that we just submitted uses the default parameters from shasta packag
 
 I have generated three assemblies using Shasta, with the "\-\-Kmers.k" set as the default (10), 12 and 8, as well as one assembly using Canu with default parameters. The results are summarized in this [report](report.nb.html).
 
-Shasta produces the assembly graph in [gfa format](https://github.com/GFA-spec/GFA-spec/blob/master/GFA2.md) as one of the outputs, same as most other long read assembly packages. We could inspect the assembly graph using [Bandage](https://rrwick.github.io/Bandage/). It can be easily downloaded to all three major platforms. Following the instructions on the [Bandage](https://rrwick.github.io/Bandage/) website, one can load our assembly graph and visualize it.
+Shasta produces the assembly graph in [gfa format](http://gfa-spec.github.io/GFA-spec/GFA1.html#:~:text=The%20GFA%20format%20is%20a,Header%20lines%20start%20with%20H%20.) as one of the outputs, same as most other long read assembly packages. We could inspect the assembly graph using [Bandage](https://rrwick.github.io/Bandage/). It can be easily downloaded to all three major platforms. Following the instructions on the [Bandage](https://rrwick.github.io/Bandage/) website, one can load our assembly graph and visualize it.
 
 
 ---
