@@ -136,7 +136,7 @@ After polishing using racon, one may carry out another polishing step using [med
 
 **8\.** At this stage, one should be ready for scaffolding. However, it is always recommended to assess the quality of the assembly. There are several things one may try.
 
-&nbsp;$nbsp;$nbsp;$nbsp;**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
+&ensp;**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
 
     cp /share/workshop/genome_assembly/jli/Nanopore/run.scripts/run_busco.slurm .
     sbatch -J bsc.${USER} run_busco.slurm
