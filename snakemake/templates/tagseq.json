@@ -1,0 +1,36 @@
+{
+    "__default__" :
+    {
+        "__comment1": "running_locally=[True,False] ~ type=[PE,SE,tagseq]",
+        "running_locally" : "False",
+        "type": "tagseq",
+
+        "__comment2": "Path to the file containing a column of sample names",
+        "samples_file": "tagseq/samples.txt"
+    },
+    "project": {
+        "basename": "/share/workshop/$USER/snakemake-tutorial/tagseq",
+        "id": "PE",
+        "fastqs": "00-RawData",
+        "human_rrna_ref": "/share/biocore/keith/workshop/rnaseq_examples/References/human_rrna.fasta",
+        "star_ref": "/share/workshop/msettles/rnaseq_example/References/star.overlap100.gencode.v31",
+    },
+    "hts_star" :
+    {
+        "__comment": "This is for running one sample for htspreproc > star",
+        "job-name": "hts_star_",
+        "n" : 1,
+        "ntasks": 9,
+        "partition": "production",
+        "time" : "120",
+        "mem": "32000",
+
+        "__comment2": "The name of the sample and analysis type will be inserted before .out and .err",
+        "output": "slurm_out/hts_star_.out",
+        "error": "slurm_out/hts_star_.err",
+        "mail-type": "NONE",
+        "mail-user": "kgmitchell@ucdavis.edu"
+    },
+}
+
+

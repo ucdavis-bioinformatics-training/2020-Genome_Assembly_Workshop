@@ -1,0 +1,29 @@
+{
+    "__default__" :
+    {
+        "running_locally" : "False"
+    },
+    "project": {
+        "basename": "/share/biocore/keith/workshop/tagseq",
+        "id": "TagSeq",
+        "fastqs": "00-RawData",
+        "human_rrna_ref": "/share/biocore/keith/workshop/rnaseq_examples/References/human_rrna.fasta",
+        "star_ref": "/share/workshop/msettles/rnaseq_example/References/star.overlap100.gencode.v31",
+    },
+    "hts_star" :
+    {
+        "__comment": "This is for running one sample for htspreproc > star",
+        "job-name": "ts_hts_star_",
+        "n" : 1,
+        "ntasks": 9,
+        "partition": "production",
+        "time" : "120",
+        "mem": "32000",
+        "output": "slurm_out/ts_hts_star.out",
+        "error": "slurm_out/ts_hts_star.err",
+        "mail-type": "ALL",
+        "mail-user": "kgmitchell@ucdavis.edu"
+    },
+}
+
+
