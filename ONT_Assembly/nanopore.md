@@ -136,13 +136,13 @@ After polishing using racon, one may carry out another polishing step using [med
 
 **8\.** At this stage, one should be ready for scaffolding. However, it is always recommended to assess the quality of the assembly. There are several things one may try.
 
-**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
+&nbsp;$nbsp;$nbsp;$nbsp;**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
 
     cp /share/workshop/genome_assembly/jli/Nanopore/run.scripts/run_busco.slurm .
     sbatch -J bsc.${USER} run_busco.slurm
 
 
-**8.\2.** When we try using different parameters to generate assembly, or we would like to compare our assembly to a reference, we can produce a dotplot between two assemblies. One way to produce this dotplot is to use [Mummer](https://github.com/mummer4/mummer/blob/master/MANUAL.md) package. The [run_mummer.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_mummer.slurm) script aligns the medaka polished Shasta assembly to the Canu assembly and creat a dotplot between the two assemblies.
+**8\.2.** When we try using different parameters to generate assembly, or we would like to compare our assembly to a reference, we can produce a dotplot between two assemblies. One way to produce this dotplot is to use [Mummer](https://github.com/mummer4/mummer/blob/master/MANUAL.md) package. The [run_mummer.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_mummer.slurm) script aligns the medaka polished Shasta assembly to the Canu assembly and creat a dotplot between the two assemblies.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/run.scripts/run_mummer.slurm .
 
