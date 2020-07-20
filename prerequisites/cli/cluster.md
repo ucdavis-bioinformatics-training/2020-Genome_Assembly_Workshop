@@ -24,7 +24,7 @@ Our cluster requires that you specify a time limit for your job. If your job exc
 
     srun -t 00:30:00 -c 4 -n 1 --mem 2000 --partition production --account genome_workshop --reservation genome_workshop --pty /bin/bash
 
-This command is requesting a compute node with a time limit of 30 minutes (-t), one processor (-c), a max memory of 2Gb [2000] (--mem), using a compute account and reservation for this workshop (an option you would not normally use), and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly.
+This command is requesting a compute node with a time limit of 30 minutes (-t), four cpus (-c), one task (-n), and a max memory of 2Gb [2000] (--mem), using a compute account and reservation for this workshop (an option you would not normally use), and then finally, specifying a shell to run in a terminal ("--pty" option). Run this command to get to a compute node when you want to run jobs on the command-line directly.
 
 <div class="output">srun: job 29390113 queued and waiting for resources
 srun: job 29390113 has been allocated resources
@@ -56,7 +56,7 @@ Generally, we do not use any options for sbatch ... we typically give it a scrip
 #SBATCH --mem=2000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # cluster partition
 #SBATCH --reservation=genome_workshop # cluster reservation
-#SBATCH --account=genome_assembly_workshop # cluster account to use for the job
+#SBATCH --account=genome_workshop # cluster account to use for the job
 ##SBATCH --array=1-16 # Task array indexing, see https://slurm.schedmd.com/job_array.html, the double # means this line is commented out
 #SBATCH --output=stdout.out # File to which STDOUT will be written
 #SBATCH --error=stderr.err # File to which STDERR will be written
