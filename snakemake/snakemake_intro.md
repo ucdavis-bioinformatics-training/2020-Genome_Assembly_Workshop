@@ -201,7 +201,7 @@ Let's look at a couple of ways we can run the snakemake workflow on the cluster.
 that will then execute the `snakemake --use-conda` command. This does not fully utilize the capability 
 of snakemake's ability. Go ahead and run this command. 
 ```
-sbatch -t 1:00:00 -n 1 --ntasks 1 --mem 2000 --partition production --account genome_workshop --reservation genome_workshop --wrap='snakemake --use-conda'
+sbatch -t 0:30:00 -n 1 --ntasks 1 --mem 2000 --partition production --account genome_workshop --reservation genome_workshop --wrap='snakemake --use-conda'
 ```
 
 After running the command above and your job has finished running, clean up the files (`rm -rf mapped/ calls/ plots/`) and run the line below. 
@@ -209,22 +209,23 @@ Running the sbatch within snakemake allows for a more control over your resource
 We will use the `config.json` file, as seen below, for this:
 
 ```
-snakemake -j 99 --cluster-config cluster.json --cluster "sbatch -t {cluster.time} --output {cluster.output} --error {cluster.error} --nodes {cluster.nodes} --ntasks {cluster.ntasks} --cpus-per-task {cluster.cpus} --mem {cluster.mem} --partition {cluster.partition} --account (cluster.account} --reservation {cluster.reservation}" --use-conda --latency-wait 50
+snakemake -j 99 --cluster-config cluster.json --cluster "sbatch -t {cluster.time} --output {cluster.output} --error {cluster.error} --nodes {cluster.nodes} --ntasks {cluster.ntasks} --cpus-per-task {cluster.cpus} --mem {cluster.mem} --partition {cluster.partition} --account {cluster.account} --reservation {cluster.reservation}" --use-conda --latency-wait 50
 ```
 
 <pre class="prettyprint"><code class="language-py" style="background-color:333333">
 {
     "__default__" :
     {
-        "A" : "overall",
-        "time" : "1:00:00",
+        "time" : "0:20:00",
         "nodes": 1,
         "ntasks": 1,
         "cpus" : 1,
-        "p" : "standard",
         "mem": 2000,
         "output": "snakemake%A.out",
-        "error": "snakemake%A.err"
+        "error": "snakemake%A.err",
+        "reservation": "genome_workshop",
+        "partition": "production",
+        "account": "genome_workshop"
     }
 }
 </code></pre>
