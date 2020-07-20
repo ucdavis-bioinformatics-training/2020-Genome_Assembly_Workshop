@@ -35,6 +35,8 @@ navigation:
     url: prerequisites/cli/advanced-command-line
   - title: CLI - Running jobs on the Cluster and using modules
     url: prerequisites/cli/cluster
+  - title: Conda
+    url: prerequisites/cli/conda
   - title: R - Getting Started
     url: prerequisites/intro2R/RStudio
   - title: R - Intro to R
