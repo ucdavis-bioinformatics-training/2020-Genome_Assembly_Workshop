@@ -44,7 +44,7 @@ use Exit on the command line to exit the session
 
     sbatch --help
 
-Generally, we do not use any options for sbatch ... we typically give it a script (i.e. a text file with commands inside) to run. Let's take a look at a template script [template.slurm](../software_scripts/scripts/template.slurm):
+Generally, we do not use any options for sbatch ... we typically give it a script (i.e. a text file with commands inside) to run. Let's take a look at a template script [template.slurm](/2020-Genome_Assembly_Workshop/software_scripts/scripts/template.slurm):
 
 <div class="script">#!/bin/bash
 
@@ -84,7 +84,7 @@ The first line tells sbatch what scripting language (bash here) the rest of the 
     cat template.slurm
     sbatch template.slurm
 
-The non slurm version is the [template.sh](../software_scripts/scripts/template.sh) script. You'll notice it looks the same only missing the #SBATCH commands.
+The non slurm version is the [template.sh](/2020-Genome_Assembly_Workshop/software_scripts/scripts/template.sh) script. You'll notice it looks the same only missing the #SBATCH commands.
 
 After finishing you will see two new files in the directory stdout.out and stderr.err where stdout and stderr (respectively) were redirected to.
 
