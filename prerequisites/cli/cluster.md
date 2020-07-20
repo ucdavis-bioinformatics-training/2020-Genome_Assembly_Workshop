@@ -44,6 +44,8 @@ use Exit on the command line to exit the session
 
     sbatch --help
 
+Full path: [template.slurm](/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/template.slurm)
+
 Generally, we do not use any options for sbatch ... we typically give it a script (i.e. a text file with commands inside) to run. Let's take a look at a template script [template.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/template.slurm):
 
 <div class="script">#!/bin/bash
