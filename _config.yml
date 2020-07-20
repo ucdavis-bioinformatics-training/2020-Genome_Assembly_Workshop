@@ -51,6 +51,8 @@ navigation:
   - heading: Snakemake
   - title: Introduction
     url: snakemake/snakemake_intro
+  - title: Challenge Answers
+    url: snakemake/answer
 
   - heading: K-mers
   - title: K-mers tutorial

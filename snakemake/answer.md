@@ -33,4 +33,4 @@ OR
 ```        
    "sed '1,28d' {input} > {output}"
 ```
-5. temp() on the sorted one
+5. temp() on the sort rule output like bwa rule. 
