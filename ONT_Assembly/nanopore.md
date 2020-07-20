@@ -136,27 +136,27 @@ After polishing using racon, one may carry out another polishing step using [med
 
 **8\.** At this stage, one should be ready for scaffolding. However, it is always recommended to assess the quality of the assembly. There are several things one may try.
 
-**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
+&ensp;**8\.1** First, one may run BUSCO to assess the completeness of the assembled gene space. The [run_busco.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_busco.slurm) script runs busco using the embryophyta_odb10 dataset and arabidopsis as the augustus training species. The result of busco run is [here](short_summary.specific.embryophyta_odb10.assembly.before.purge.txt).
 
     cp /share/workshop/genome_assembly/jli/Nanopore/run.scripts/run_busco.slurm .
     sbatch -J bsc.${USER} run_busco.slurm
 
 
-**8.\2.** When we try using different parameters to generate assembly, or we would like to compare our assembly to a reference, we can produce a dotplot between two assemblies. One way to produce this dotplot is to use [Mummer](https://github.com/mummer4/mummer/blob/master/MANUAL.md) package. The [run_mummer.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_mummer.slurm) script aligns the medaka polished Shasta assembly to the Canu assembly and creat a dotplot between the two assemblies.
+&ensp;**8\.2.** When we try using different parameters to generate assembly, or we would like to compare our assembly to a reference, we can produce a dotplot between two assemblies. One way to produce this dotplot is to use [Mummer](https://github.com/mummer4/mummer/blob/master/MANUAL.md) package. The [run_mummer.slurm](https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/scripts/ONT/run_mummer.slurm) script aligns the medaka polished Shasta assembly to the Canu assembly and creat a dotplot between the two assemblies.
 
     cp /share/workshop/genome_assembly/jli/Nanopore/run.scripts/run_mummer.slurm .
 
     sbatch -J nuc.${USER} run_mummer.sh
 
 
-When the job finishes, we should have a file named "canu.vs.shasta.png" in the "06-Mummer" directory. We can download it to our laptop for viewing. The assembly from Canu is on the X axis. The dotplot I generated is ![here](canu.vs.shasta.png).
+&ensp;When the job finishes, we should have a file named "canu.vs.shasta.png" in the "06-Mummer" directory. We can download it to our laptop for viewing. The assembly from Canu is on the X axis. The dotplot I generated is ![here](canu.vs.shasta.png).
 
-There is a very nice web service ([Dgenies](http://dgenies.toulouse.inra.fr/) that can produce a much nicer plot. The source code can also be downloaded and compiled on your local machine. The result I got from running Dgenies is [here](.html)
+&ensp;There is a very nice web service ([Dgenies](http://dgenies.toulouse.inra.fr/)) that can produce a much nicer plot. The source code can also be downloaded and compiled on your local machine. The result I got from running Dgenies is [here](medaka.consensus_canu_WeX6x_20200719223219.html)
 
-**8\.3** The quality of an assembly may be assessed using Illumina whole genome data. There are a few packages that can be used to carry out this step, such as [KAT](https://github.com/TGAC/KAT), [yak](https://github.com/lh3/yak), [merqury](https://github.com/marbl/merqury). I will leave you on your own to explore this.
+&ensp;**8\.3** The quality of an assembly may be assessed using Illumina whole genome data. There are a few packages that can be used to carry out this step, such as [KAT](https://github.com/TGAC/KAT), [yak](https://github.com/lh3/yak), [merqury](https://github.com/marbl/merqury). I will leave you on your own to explore this.
 
 
-**8\.4** One other potential way to assess the quality of an assembly is to use transcriptome data, such as IsoSeq or regular mRNASeq data.
+&ensp;**8\.4** One other potential way to assess the quality of an assembly is to use transcriptome data, such as IsoSeq or regular mRNASeq data.
 
 
 

@@ -1,0 +1,14 @@
+# BUSCO version is: 4.0.2 
+# The lineage dataset is: embryophyta_odb10 (Creation date: 2019-11-20, number of species: 50, number of BUSCOs: 1614)
+# Summarized benchmarking in BUSCO notation for file pilon.polished.fasta
+# BUSCO was run in mode: genome
+
+	***** Results: *****
+
+	C:96.3%[S:92.8%,D:3.5%],F:1.1%,M:2.6%,n:1614	   
+	1553	Complete BUSCOs (C)			   
+	1497	Complete and single-copy BUSCOs (S)	   
+	56	Complete and duplicated BUSCOs (D)	   
+	18	Fragmented BUSCOs (F)			   
+	43	Missing BUSCOs (M)			   
+	1614	Total BUSCO groups searched		   
