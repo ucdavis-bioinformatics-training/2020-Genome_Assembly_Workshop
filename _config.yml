@@ -11,6 +11,8 @@ navigation:
     url: base/welcome
   - title: Schedule
     url: base/schedule
+  - title: Genome Assembly
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/Genome_assembly_July_2020.pdf
 
   - heading: Introduction
   - title: Intro to the Workshop and Core
