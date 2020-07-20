@@ -39,7 +39,7 @@ Snakemake is different from other workflow systems (like CWL-Common workflow lan
     ``` 
     cd /share/workshop/$USER
     mkdir snakemake-demo
-    cp -r /share/biocore/keith/examples/snakemake-demo/* snakemake-demo/
+    cp -r /share/biocore/workshops/Genome-Assembly-Workshop-Jun2020/snakemake-demo/* snakemake-demo/
     cd snakemake-demo
     ```
   
@@ -56,9 +56,10 @@ config.json  data  envs  scripts  slurm-24072402.out  Snakefile
     override that you can specify it following the `-s`
         - `snakemake -s snakefile.py`
  - envs = directory for storing the conda environments that the workflow will use. 
- - scrips = directory for storing python scripts called by the snakemake formula.
- - config.json = 
- 
+ - scripts = directory for storing python scripts called by the snakemake formula.
+ - config.json = json format file with extra parameters for our snakemake file to use.
+ - cluster.json = json format file with specification for running on the HPC
+ - samples.txt = file we will use later relating to the config.json file. 
  
 Let's look at the contents of the `Snakefile` and talk a bit about what it is doing. 
 
@@ -124,7 +125,11 @@ rule stats:
     module load snakemake/5.6.0
     source activate snakemake
     ```
-
+**Note**: if you have trouble with the `source activate snakemake` command try the following:
+    ```
+    conda init bash
+    source ~/.bashrc
+    ```
 2. Run the snakemake file as a dry run (the example workflow shown above). 
     - This will build a DAG of the jobs to be run without actually executing them.
     - `snakemake --dry-run`
@@ -144,7 +149,7 @@ rule stats:
 
 ## Challenge activities and CLI/cluster warmup:
 Please attempt the advanced questions but do not worry if they are too difficult. 
-Send a private message to me on Slack with your answers and raise your hand when you are finished. 
+Send a private message to me on Slack with your answers and raise your hand on zoom when you are finished. 
 
 
 1. Access the svg file from the cluster to your local computer to view it yourself after running the `--dag` command.
@@ -153,7 +158,7 @@ Send a private message to me on Slack with your answers and raise your hand when
     - It may say "Nothing to be done." Why is this and how can you overcome it? (For example try first starting by removing the plots and see what happens)
 3. Which lines on the above `Snakefile` would not work on an HPC? (Hint: why is the stats rule not this way?) **(5 mins)**
 4. Advanced: We now have a graph of the vcf quality scores but not we may want to do some more advanced analysis with the vcf file. 
-Create a rule in the snakemake file that strips the header from the vcf file so we are only left with a tsv. 
+Create a rule in the snakemake file that strips the header from the vcf file (lines with '##' in it) so we are only left with a tsv. 
 Now run just the snakemake and specify just that rule you have just created. Why does running the snakemake with this rule not produce any plots?
 How can you adjust the all rule to run this new rule and the plot rule? **(15 mins)**
 5. Advanced: Use the snakemake documentation or google to find out how to remove not store the sorted mappings. Then implement this in the file above, clean the files, and rerun. (Hint: we also use this in the snakefile above). **(7 mins)**
@@ -161,19 +166,64 @@ How can you adjust the all rule to run this new rule and the plot rule? **(15 mi
 
 
 
-## Running the snakefile as a job on the cluster. 
+## Running the snakefile as a job on the cluster and using the config file
+Let's look at a couple of ways we can run the snakemake workflow on the cluster. The first one shown here runs one job on the cluster 
+that will then execute the `snakemake --use-conda` command. This does not fully utilize the capability 
+of snakemake's ability. Go ahead and run this command. 
+```
+sbatch -t 1:00:00 -n 1 --ntasks 1 --mem 2000 --wrap='snakemake --use-conda'
+```
 
+After running the command above and your job has finished running, clean up the files (`rm -rf mapped/ calls/ plots/`) and run the line below. 
+Running the sbatch within snakemake allows for a more control over your resources for each rule in the pipleine.
+We will use the `config.json` file, as seen below, for this:
 
+```
+snakemake -j 99 --cluster-config cluster.json --cluster "sbatch -t {cluster.time} --output {cluster.output} --error {cluster.error} --nodes {cluster.nodes} --ntasks {cluster.ntasks} --cpus-per-task {cluster.cpus} --mem {cluster.mem}" --use-conda --latency-wait 50
+```
+
+<pre class="prettyprint"><code class="language-py" style="background-color:333333">
+{
+    "__default__" :
+    {
+        "A" : "overall",
+        "time" : "1:00:00",
+        "nodes": 1,
+        "ntasks": 1,
+        "cpus" : 1,
+        "p" : "standard",
+        "mem": 2000,
+        "output": "snakemake%A.out",
+        "error": "snakemake%A.err"
+    }
+}
+</code></pre>
+
+What do you notice about the difference between the two? 
+
+Note: In my experience this can be a bit tricky, and it is not something, I myself, have entirely mastered, but I encourage working to get more comfortable with it! 
+    
 ## Using the config file. 
+We are going to run a small example of how we can use the config file to increase the robustness of our Snakefile:
+Replace `samples = ["A", "B"]` with the following:
 
+<pre class="prettyprint"><code class="language-py" style="background-color:333333">
+import json
+import sys
+samples = []
+with open(config["__default__"]['samples_file'], 'r') as samples_file:
+    for line in samples_file:
+        if line.strip('\n') != '':
+            samples.append(line.strip('\n'))
+print(samples)
+</code></pre>
+Then run the snakefile specifying the custom parameters in our json file. 
+```
+snakemake --use-conda --configfile config.json
+```
 
+## Extra resources:
+[Snakemake Documentation Homepage](https://snakemake.readthedocs.io/en/stable/index.html)
 
-# TODO 
-- make sure source activate command works. 
-- include conda documentation/ talk a bit more about conda
-- include extra snakemake resources 
-- finish my snakemake extra rule
-- hide the answers somwhere (rm -rf calls)
-- make a couple more backup directories for myself. 
 
 
