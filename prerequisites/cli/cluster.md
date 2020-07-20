@@ -80,7 +80,7 @@ The first line tells sbatch what scripting language (bash here) the rest of the 
 
 
     cd /share/workshop/genome_assembly/$USER
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-mRNA_Seq_Workshop/master/software_scripts/scripts/template.slurm
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2020-Genome_Assembly_Workshop/master/software_scripts/scripts/template.slurm
     cat template.slurm
     sbatch template.slurm
 
