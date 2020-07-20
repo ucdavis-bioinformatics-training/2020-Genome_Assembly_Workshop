@@ -16,7 +16,6 @@ navigation:
   - title: Introduction to the DNA Tech Core
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/dnatech_presentation_genome_assembly_2020.pdf
 
-
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: base/welcome
