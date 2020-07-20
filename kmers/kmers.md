@@ -210,6 +210,9 @@ The large number of unique (near unique) K-mers that have a frequency of 1-7 (th
 #### Genomescope model
 Genomescope uses an equation that accurately models the shape and size of the K-mer graph using four negative binomial peaks whose shape and size are determined by % heterozygosity, % sequencing duplication, % sequencing Error. All very useful pieces of information to learn about your genome from your raw data.
 
+For polyploid organisms, they are working on genomescope2.0
+https://github.com/tbenavi1/genomescope2.0
+
 **Continued Exploration**
 
 * Given the estimated genome size and sum of read  length = 5B basepairs, what is the coverage est.
