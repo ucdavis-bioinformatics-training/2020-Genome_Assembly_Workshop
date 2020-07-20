@@ -4,8 +4,8 @@
 2. Initial Setup
 3. Brief Overview of Commands Using the Example Workflow
 4. Challenge activities and CLI/cluster warmup
-5. Running the snakefile as a job on the cluster
-6. Using the config file
+5. Using the config file
+6. Running the snakefile as a job on the cluster 
 
 ## Overview
 
@@ -32,12 +32,12 @@ Snakemake is different from other workflow systems (like CWL-Common workflow lan
 
 - Make sure you have a directory in the workshop folder (`/share/workshop/$USER`):
     ```
-    mkdir /share/workshop/$USER
+    mkdir /share/workshop/genome_assembly/$USER
     ```
 
 - Copy the materials for the intro and the tutorial:
     ``` 
-    cd /share/workshop/$USER
+    cd /share/workshop/genome_assembly/$USER
     mkdir snakemake-demo
     cp -r /share/biocore/workshops/Genome-Assembly-Workshop-Jun2020/snakemake-demo/* snakemake-demo/
     cd snakemake-demo
@@ -164,6 +164,36 @@ How can you adjust the all rule to run this new rule and the plot rule? **(15 mi
 5. Advanced: Use the snakemake documentation or google to find out how to remove not store the sorted mappings. Then implement this in the file above, clean the files, and rerun. (Hint: we also use this in the snakefile above). **(7 mins)**
 
 
+## Using the config file. 
+We are going to run a small example of how we can use the config file to increase the robustness of our Snakefile:
+
+Let't take a look at the cofig file (config.json):
+<pre class="prettyprint"><code class="language-py" style="background-color:333333">
+ {
+     "__default__" :
+     {
+         "samples_file" : "samples.txt",
+     },
+ }
+</code></pre>
+
+Replace `samples = ["A", "B"]` with the following and clean up your files (`rm -rf calls/ mapped/ plots/`):
+
+<pre class="prettyprint"><code class="language-py" style="background-color:333333">
+import json
+import sys
+samples = []
+with open(config["__default__"]['samples_file'], 'r') as samples_file:
+    for line in samples_file:
+        if line.strip('\n') != '':
+            samples.append(line.strip('\n'))
+print(samples)
+</code></pre>
+Then run the snakefile specifying the custom parameters in our json file. 
+```
+snakemake --use-conda --configfile config.json
+```
+
 
 
 ## Running the snakefile as a job on the cluster and using the config file
@@ -171,7 +201,7 @@ Let's look at a couple of ways we can run the snakemake workflow on the cluster.
 that will then execute the `snakemake --use-conda` command. This does not fully utilize the capability 
 of snakemake's ability. Go ahead and run this command. 
 ```
-sbatch -t 1:00:00 -n 1 --ntasks 1 --mem 2000 --wrap='snakemake --use-conda'
+sbatch -t 1:00:00 -n 1 --ntasks 1 --mem 2000 --partition production --account genome_workshop --reservation genome_workshop --wrap='snakemake --use-conda'
 ```
 
 After running the command above and your job has finished running, clean up the files (`rm -rf mapped/ calls/ plots/`) and run the line below. 
@@ -179,7 +209,7 @@ Running the sbatch within snakemake allows for a more control over your resource
 We will use the `config.json` file, as seen below, for this:
 
 ```
-snakemake -j 99 --cluster-config cluster.json --cluster "sbatch -t {cluster.time} --output {cluster.output} --error {cluster.error} --nodes {cluster.nodes} --ntasks {cluster.ntasks} --cpus-per-task {cluster.cpus} --mem {cluster.mem}" --use-conda --latency-wait 50
+snakemake -j 99 --cluster-config cluster.json --cluster "sbatch -t {cluster.time} --output {cluster.output} --error {cluster.error} --nodes {cluster.nodes} --ntasks {cluster.ntasks} --cpus-per-task {cluster.cpus} --mem {cluster.mem} --partition {cluster.partition} --account (cluster.account} --reservation {cluster.reservation}" --use-conda --latency-wait 50
 ```
 
 <pre class="prettyprint"><code class="language-py" style="background-color:333333">
@@ -203,24 +233,6 @@ What do you notice about the difference between the two?
 
 Note: In my experience this can be a bit tricky, and it is not something, I myself, have entirely mastered, but I encourage working to get more comfortable with it! 
     
-## Using the config file. 
-We are going to run a small example of how we can use the config file to increase the robustness of our Snakefile:
-Replace `samples = ["A", "B"]` with the following:
-
-<pre class="prettyprint"><code class="language-py" style="background-color:333333">
-import json
-import sys
-samples = []
-with open(config["__default__"]['samples_file'], 'r') as samples_file:
-    for line in samples_file:
-        if line.strip('\n') != '':
-            samples.append(line.strip('\n'))
-print(samples)
-</code></pre>
-Then run the snakefile specifying the custom parameters in our json file. 
-```
-snakemake --use-conda --configfile config.json
-```
 
 ## Extra resources:
 [Snakemake Documentation Homepage](https://snakemake.readthedocs.io/en/stable/index.html)
