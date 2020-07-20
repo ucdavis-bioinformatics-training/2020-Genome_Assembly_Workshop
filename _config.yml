@@ -50,6 +50,10 @@ navigation:
   - title: Introduction
     url: snakemake/snakemake_intro
 
+  - heading: K-mers
+  - title: K-mers tutorial
+    url: kmers/kmers
+
   - heading: ONT Assembly
   - title: Assembly using ONT - Hands-on
     url: ONT_Assembly/nanopore
