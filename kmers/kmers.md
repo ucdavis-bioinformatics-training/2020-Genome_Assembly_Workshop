@@ -220,6 +220,7 @@ https://github.com/tbenavi1/genomescope2.0
     * /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_data/ELF_19kb.m64001_190914_015449.Q20.9X.fasta
     * /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_data/ELF_19kb.m64001_190914_015449.Q20.19X.fasta
     * /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_data/ELF_19kb.m64001_190914_015449.Q20.28X.fasta
+* What does changing the K-mer size do, for low (~13) and high (~31)?
 * What does Illumina data look like? Illumina data for the parents can be found here:  
     /share/workshop/genome_assembly/pacbio_2020_data_drosophila/short_read_data
 * What does high noise Oxford Nanopore data look like?    
