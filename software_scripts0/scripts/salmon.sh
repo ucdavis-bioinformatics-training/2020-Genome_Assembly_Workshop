@@ -6,8 +6,8 @@ echo $HOSTNAME
 outpath='02-Salmon_alignment'
 [[ -d ${outpath} ]] || mkdir ${outpath}
 
-REF="References/salmon_gencode.v31.index"
-GTF="References/gencode.v31.primary_assembly.annotation.gtf"
+REF="References/salmon_gencode.v34.index"
+GTF="References/gencode.v34.primary_assembly.annotation.gtf"
 
 for sample in `cat samples.txt`
 do

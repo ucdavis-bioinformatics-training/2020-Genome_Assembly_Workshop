@@ -6,30 +6,32 @@
 #SBATCH --time=120
 #SBATCH --mem=40000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production
-#SBATCH --reservation=workshop
-#SBATCH --account=workshop
+#SBATCH --reservation=mrnaseq_workshop
+#SBATCH --account=mrnaseq_workshop
 #SBATCH --output=slurmout/star-index_%A.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/star-index_%A.err # File to which STDERR will be written
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=myemail@email.com
 
 start=`date +%s`
 echo $HOSTNAME
 
 outpath="References"
-[[ -d ${outpath} ]] || mkdir ${outpath}
+mkdir -p ${outpath}
 
 cd ${outpath}
-wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_31/GRCh38.primary_assembly.genome.fa.gz
+wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/GRCh38.primary_assembly.genome.fa.gz
 gunzip GRCh38.primary_assembly.genome.fa.gz
 FASTA="../GRCh38.primary_assembly.genome.fa"
 
-wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_31/gencode.v31.primary_assembly.annotation.gtf.gz
-gunzip gencode.v31.primary_assembly.annotation.gtf.gz
-GTF="../gencode.v31.primary_assembly.annotation.gtf"
+wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.primary_assembly.annotation.gtf.gz
+gunzip gencode.v34.primary_assembly.annotation.gtf.gz
+GTF="../gencode.v34.primary_assembly.annotation.gtf"
 
-mkdir star.overlap100.gencode.v31
-cd star.overlap100.gencode.v31
+mkdir star.overlap100.gencode.v34
+cd star.overlap100.gencode.v34
 
-module load star/2.7.0e
+module load star
 
 call="STAR
      --runThreadN 8 \
