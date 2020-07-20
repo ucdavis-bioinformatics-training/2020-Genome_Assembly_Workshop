@@ -49,14 +49,17 @@ We ask for a little more patience as this process is also new to us, but we are 
 
 ### Workshop Goals
 
-* End-to-End understanding of RNAseq differential expression analysis
+* Current Topics in Genome Assembly
   * Discussions/lectures
   * Technologies
   * Experimental design
-  * Cost estimation
-  * Data reduction workflow
-  * mRNA gene expression data analysis
-* To work through a complete experiment, starting from raw data to completion, including making figures.
+  * Snakemake
+  * Kmers
+  * PacBio HiFi and IPA assembler
+  * Oxford Nanopore Assembly
+  * Bionano Genomics Scaffolding
+  * Scaffolding with HiC (Phase Genomics)
+  * Busco and Assembly QA/QC
 
 * Goal is 30-40% lecture/discussion 60-70% hands-on
 
@@ -75,9 +78,9 @@ Workshop materials are all posted on github, and publicly available
    [https://ucdavis-bioinformatics-training.github.io/](https://ucdavis-bioinformatics-training.github.io/)
 
 
-* This mRNAseq Workshop
+* This Genome Assembly Workshop
 
-   [https://ucdavis-bioinformatics-training.github.io/2020-mRNA_Seq_Workshop/](https://ucdavis-bioinformatics-training.github.io/2020-mRNA_Seq_Workshop/)
+   [https://ucdavis-bioinformatics-training.github.io/genome_assembly_2020/](https://ucdavis-bioinformatics-training.github.io/genome_assembly_2020/)
 
 ### Computing Cluster
 
@@ -87,4 +90,4 @@ Instructions on how to get an account will be sent by email
 
 If you already have, or have had in the past, an account on our systems, then please tell us your username, or email, and we will add you to the workshop. **Do not create a new account**
 
-Cluster usage will be under the slurm reservation  ‘mrnaseq_workshop’
+Cluster usage will be under the slurm reservation   'genome_workshop’

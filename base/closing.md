@@ -2,15 +2,8 @@
 
 **The forest through the trees.**
 
-<img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/flowcharts/flowchart_mrna.png" alt="flowchart_mrna.png" width="600px"/>
+<img src="" alt="flowchart_genome.png" width="600px"/>
 
-## Be Consistent
-
-* Be Consistent
-* Be Consistent
-* Be Consistent
-* Be Consistent
-* Be Consistent
 
 ## Prerequisites for bioinformatics
 
@@ -35,7 +28,6 @@ My recommendation is to follow all of the instructions again, from the beginning
 Now in our 13th year of training researchers, the UC Davis Bioinformatics Core invites you to attend one or more of our 2020 workshops. The following workshops are suitable for beginners to advanced researchers, and are also of interest to those with some data analysis experience.
 
 | :------------- |:-------------:|
-|Jun 29 - Jul 2, 2020 | Remote Genome Assembly |
 |Jul 27 - Jul 31, 2020 | RNA-Seq Workshop @ UC Davis |
 |Aug 12 - Aug 14, 2020 | Introduction to Single Cell RNA-Seq  @ UC Davis |
 |Aug 17 - Aug 19, 2020 | Advanced Single Cell RNA-Seq @ UC Davis |

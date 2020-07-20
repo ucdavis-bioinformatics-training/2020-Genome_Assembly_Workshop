@@ -44,4 +44,4 @@ If you have any questions, please don’t hesitate to contact us at [training.bi
 
 ### Register
 
-For the remote/virtual [course](https://registration.genomecenter.ucdavis.edu/events/genome_assembly_2020/) in Julu.
+For the remote/virtual [course](https://registration.genomecenter.ucdavis.edu/events/genome_assembly_2020/) in July.
