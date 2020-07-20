@@ -8,7 +8,7 @@
 #SBATCH --mem=2000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # cluster partition
 #SBATCH --account=genome_workshop # cluster account to use for the job
-#SBATCH --reservation=genome_assembly_workshop # cluster account reservation
+#SBATCH --reservation=genome_workshop # cluster account reservation
 ##SBATCH --array=1-16 # Task array indexing, see https://slurm.schedmd.com/job_array.html, the double # means this line is commented out
 #SBATCH --output=stdout.out # File to which STDOUT will be written
 #SBATCH --error=stderr.err # File to which STDERR will be written
