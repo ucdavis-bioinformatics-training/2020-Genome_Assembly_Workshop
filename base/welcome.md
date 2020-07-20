@@ -80,7 +80,7 @@ Workshop materials are all posted on github, and publicly available
 
 * This Genome Assembly Workshop
 
-   [https://ucdavis-bioinformatics-training.github.io/genome_assembly_2020/](https://ucdavis-bioinformatics-training.github.io/genome_assembly_2020/)
+   [https://ucdavis-bioinformatics-training.github.io/2020-Genome_Assembly_Workshop/](https://ucdavis-bioinformatics-training.github.io/2020-Genome_Assembly_Workshop/)
 
 ### Computing Cluster
 

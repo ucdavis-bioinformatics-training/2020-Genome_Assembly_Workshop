@@ -11,9 +11,9 @@ All times are PDT / UTC-07:00
 **10:00**   SnakeMake by *Keith Mitchell, Bioinformatics Core, UC Davis*  
 **12:00** Lunch hour       
 **1:00** Kmers and Genomes  
-**4:00** Introduction to DNA Technologies Core
-**4:30** Wrap-up  
-**5:00** Zoom session ends  
+**4:00** Introduction to DNA Technologies Core    
+**4:30** Wrap-up    
+**5:00** Zoom session ends    
 
 ### Tuesday, June 21
 
@@ -25,30 +25,30 @@ All times are PDT / UTC-07:00
 **10:45** Improved Phased Assembly (IPA) Using HiFi Data- *Dr. Ivan Sovic, Assembly Technical Lead*  
 **11:15** Morning wrap-up and lab set up  
 **12:00** Lunch  
-**1:00** Assembling the genome using PacBio's HiFi data assembly tool, IPA- *Dr. Zev Kronenberg, Senior Engineer*  
-**4:30** Wrap-up  
+**1:00** Assembling the genome using PacBio's HiFi data assembly tool, IPA- *Dr. Zev Kronenberg, Senior Engineer*      
+**4:30** Wrap-up    
 **5:00** Zoom session ends  
 
 ### Wednesday, June 22
 
 **8:50** Zoom session starts  
-**9:00** Recap of previous day
-**9:30** Assembling a genome with Oxford Nanopore Data *Dr. Jessie Li, Bioininformatics Core, UC Davis*     
+**9:00** Recap of previous day   
+**9:30** Assembling a genome with Oxford Nanopore Data *Dr. Jessie Li, Bioininformatics Core, UC Davis*      
 **12:00** Lunch  
 **1:00** Assembling a genome with Oxford Nanopore Data (Cont.) *Dr. Jessie Li, Bioininformatics Core, UC Davis*       
-**3:00** Bionano Genomics scaffolding *Dr. Alex Hastie, Bionano Genomics*
-**4:30** Wrap-up  
+**3:00** Bionano Genomics scaffolding *Dr. Alex Hastie, Bionano Genomics*   
+**4:30** Wrap-up    
 **5:00** Zoom session ends  
 
 ### Thursday, June 23
 
-**8:50** Zoom session starts  
-**9:00** Recap of previous day
-**9:30** Scaffolding with HiC Data *Dr. Shawn Sullivan, Phase Genomics*    
-**1:00** Busco, *Dr. Sam Hunter, Bioinformatics Core, UC Davis*
-**3:00** Genomics QA/QC
-**4:30** Wrap-up  
-**5:00** Zoom session ends  
+**8:50** Zoom session starts    
+**9:00** Recap of previous day   
+**9:30** Scaffolding with HiC Data *Dr. Shawn Sullivan, Phase Genomics*      
+**1:00** Busco, *Dr. Sam Hunter, Bioinformatics Core, UC Davis*    
+**3:00** Genomics QA/QC   
+**4:30** Wrap-up   
+**5:00** Zoom session ends   
 
 ## Register
 
