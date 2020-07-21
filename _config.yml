@@ -69,6 +69,8 @@ navigation:
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/2020_UCDAVIS_IPA_LAB_Kronenberg.pdf
 
   - heading: ONT Assembly
+  - title: Introduction to ONT
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/Nanopore.pdf
   - title: Assembly using ONT - Hands-on
     url: ONT_Assembly/nanopore
 
