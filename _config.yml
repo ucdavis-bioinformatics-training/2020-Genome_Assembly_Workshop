@@ -57,6 +57,8 @@ navigation:
     url: kmers/kmers
 
   - heading: PacBio
+  - title: Introduction to PacBio HiFi Data and Applications
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/intro_to_PacBio_HiFi_and_applications_2020_07_21.pdf
   - title: Genome Assembly with PacBio HiFi Data
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
   - title: Improved Phased Assembly (IPA) Using HiFi Data
