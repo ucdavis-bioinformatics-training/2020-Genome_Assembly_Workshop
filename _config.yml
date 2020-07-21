@@ -15,6 +15,8 @@ navigation:
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/Genome_assembly_July_2020.pdf
   - title: Introduction to the DNA Tech Core
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/dnatech_presentation_genome_assembly_2020.pdf
+  - title: Genome Assembly with PacBio HiFi Data
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
 
 
   - heading: Introduction
