@@ -18,7 +18,6 @@ navigation:
   - title: Genome Assembly with PacBio HiFi Data
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
 
-
   - heading: Introduction
   - title: Intro to the Workshop and Core
     url: base/welcome
