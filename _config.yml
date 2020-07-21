@@ -59,6 +59,8 @@ navigation:
   - heading: PacBio
   - title: Genome Assembly with PacBio HiFi Data
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
+  - title: Improved Phased Assembly (IPA) Using HiFi Data
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UC_Davis-IPA_HiFi_Assembler_Sovic.pdf
   - title: Assembling the drosophila genome with IPA and HiFi data
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/2020_UCDAVIS_IPA_LAB_Kronenberg.pdf
 
