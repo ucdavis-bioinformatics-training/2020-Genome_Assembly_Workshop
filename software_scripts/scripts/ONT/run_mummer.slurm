@@ -27,8 +27,8 @@ export outP=$baseP/06-Mummer
 mkdir -p $shastaP
 mkdir -p $canuP
 
-ln -s /share/workshop/genome_assembly/jli/Nanopore/05-MEDAKA/* $shastaP/
-ln -s /share/workshop/genome_assembly/jli/Nanopore/03-CANU/* $canuP/ 
+ln -s /share/workshop/genome_assembly/jli/Nanopore/05-MEDAKA/consensus.fasta $shastaP/.
+ln -s /share/workshop/genome_assembly/jli/Nanopore/03-CANU/asm.contigs.fasta $canuP/. 
 
 
 ## canu assembly vs. polished shasta assembly
@@ -38,10 +38,15 @@ echo $call
 eval $call
 
 
-call="mummerplot -p $outP/canu.vs.shasta -l $outP/canu.vs.shasta.delta"
+call="mummerplot --filter --layout -p $outP/canu.vs.shasta -l $outP/canu.vs.shasta.delta"
 
 echo $call
 eval $call
+
+sed -i 's/^set mouse/#set mouse/g' $outP/canu.vs.shasta.gp
+sed -i 's/^if/#if/g' $outP/canu.vs.shasta.gp
+
+gnuplot $outP/canu.vs.shasta.gp > $outP/canu.vs.shasta.png
 
 
 end=`date +%s`

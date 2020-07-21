@@ -32,7 +32,7 @@ then
   mkdir -p $outP
 fi
 
-#cp /share/workshop/genome_assembly/jli/Nanopore/scripts/config.ini /share/workshop/genome_assembly/${USER}/Nanopore/scripts/
+cp /share/workshop/genome_assembly/jli/Nanopore/scripts/config.ini /share/workshop/genome_assembly/${USER}/Nanopore/scripts/
 export BUSCO_CONFIG_FILE=$baseP/scripts/config.ini
 
 cd $outP

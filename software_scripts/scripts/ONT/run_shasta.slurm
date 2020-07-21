@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=3-0
 #SBATCH --ntasks=48 # Number of cores
-#SBATCH --mem=400000 # Memory pool for all cores (see also --mem-per-cpu)
+#SBATCH --mem=450000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production # Partition to submit to
 #SBATCH --reservation=genome_workshop
 #SBATCH --account=genome_workshop
