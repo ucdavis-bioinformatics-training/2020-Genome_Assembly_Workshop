@@ -15,10 +15,6 @@ navigation:
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/Genome_assembly_July_2020.pdf
   - title: Introduction to the DNA Tech Core
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/dnatech_presentation_genome_assembly_2020.pdf
-  - title: Genome Assembly with PacBio HiFi Data
-    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
-  - title: Assembling the drosophila genome with IPA and HiFi data
-    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/2020_UCDAVIS_IPA_LAB_Kronenberg.pdf
 
   - heading: Support
   - title: Cheat Sheets
@@ -59,6 +55,12 @@ navigation:
   - heading: K-mers
   - title: K-mers tutorial
     url: kmers/kmers
+
+  - heading: PacBio
+  - title: Genome Assembly with PacBio HiFi Data
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCDavis_21July2020_KinganPacBio.pdf
+  - title: Assembling the drosophila genome with IPA and HiFi data
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/2020_UCDAVIS_IPA_LAB_Kronenberg.pdf
 
   - heading: ONT Assembly
   - title: Assembly using ONT - Hands-on
