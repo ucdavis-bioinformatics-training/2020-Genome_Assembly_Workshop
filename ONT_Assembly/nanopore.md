@@ -149,7 +149,7 @@ After polishing using racon, one may carry out another polishing step using [med
     sbatch -J nuc.${USER} run_mummer.sh
 
 
-&ensp;When the job finishes, we should have a file named "canu.vs.shasta.png" in the "06-Mummer" directory. We can download it to our laptop for viewing. The assembly from Canu is on the X axis. The dotplot I generated is ![here](canu.vs.shasta.png).
+&ensp;When the job finishes, we should have a file named "canu.vs.shasta.png" in the "06-Mummer" directory. We can download it to our laptop for viewing. The assembly from Canu is on the X axis. The dotplot I generated is [here](canu.vs.shasta.png).
 
 &ensp;There is a very nice web service ([Dgenies](http://dgenies.toulouse.inra.fr/)) that can produce a very nice plot. The source code can also be downloaded and compiled on your local machine. The result I got from running Dgenies is [here](medaka.consensus_canu_WeX6x_20200719223219.html)
 
