@@ -12,17 +12,24 @@ start=`date +%s`
 echo $HOSTNAME
 echo "My SLURM_JOB_ID: " $SLURM_JOB_ID
 
-module load spades/3.13.0
+module load htstream/1.3.1
 
 outpath='01-HTS_Preproc'
 
-if [ ! -d $outP ]
+if [ ! -d $outpath ]
 then
-  mkdir -p $outP
+  mkdir -p $outpath
 fi
 
-hts_Stats -L ${outpath}/${sample}.log -1 00-RawData/${sample}_R1.fastq.gz -2 00-RawData/${sample}_R2.fastq.gz | \
-hts_SeqScreener -A ${outpath}/${sample}.log | \
-hts_AdapterTrimmer -A ${outpath}/${sample}.log | \
-hts_SuperDeduper -A ${outpath}/${sample}.log | \
-hts_Stats -A ${outpath}/${sample}.log -F -f ${outpath}/${sample}
+# Clean reads:
+hts_Stats -L ${outpath}/Bacteria.json -1 00-RawData/Bacteria_R1.fastq.gz -2 00-RawData/Bacteria_R2.fastq.gz | \
+hts_SeqScreener -A ${outpath}/Bacteria.json | \
+hts_AdapterTrimmer -A ${outpath}/Bacteria.json | \
+hts_SuperDeduper -A ${outpath}/Bacteria.json | \
+hts_Stats -A ${outpath}/Bacteria.json -F -f ${outpath}/Bacteria
+
+# Assemble:
+module load spades/3.13.0
+spades.py -t 24 -1 ${outpath}/Bacteria_R1.fastq.gz -2 ${outpath}/Bacteria_R2.fastq -o 03-SpadesAssembly
+
+

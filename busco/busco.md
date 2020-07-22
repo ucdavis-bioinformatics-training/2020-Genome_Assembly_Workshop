@@ -100,14 +100,26 @@ cd bacterial_test
 mkdir 00-RawData
 ln -s /share/biocore/shunter/bacteria/*.gz ./00-RawData/
 
+# Clean the reads up a little:
+module load htstream/1.3.1
+
+mkdir -p 01-HTS_Preproc
+
+hts_Stats -L 01-HTS_Preproc/Bacteria.json -1 00-RawData/Bacteria_R1.fastq.gz -2 00-RawData/Bacteria_R2.fastq.gz | \
+hts_SeqScreener -A 01-HTS_Preproc/Bacteria.json | \
+hts_AdapterTrimmer -A 01-HTS_Preproc/Bacteria.json | \
+hts_SuperDeduper -A 01-HTS_Preproc/Bacteria.json | \
+hts_Stats -A 01-HTS_Preproc/Bacteria.json -F -f 01-HTS_Preproc/Bacteria
+
+
 mkdir slurmout
-cp /share/biocore/shunter/bacteria/run_htstream.slurm .
+cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/run_htstream.slurm .
 
 sbatch -J hts.${USER} run_htstream.slurm
 
 ```
 
-module load htstream/1.3.1
+module load spades/3.13.0
 spades.py -t 40 -1 Bacteria_R1.fastq -2 Bacteria_R2.fastq -o test
 
 
