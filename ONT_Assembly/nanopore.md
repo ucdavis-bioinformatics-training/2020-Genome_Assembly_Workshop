@@ -153,7 +153,7 @@ After polishing using racon, one may carry out another polishing step using [med
 
 &ensp;There is a very nice web service ([Dgenies](http://dgenies.toulouse.inra.fr/)) that can produce a very nice plot. The source code can also be downloaded and compiled on your local machine. The result I got from running Dgenies is [here](medaka.consensus_canu_WeX6x_20200719223219.html)
 
-&ensp;**8\.3** The quality of an assembly may be assessed using Illumina whole genome sequencing data and kmer based methods. There are a few packages that can be used to carry out this step, such as [KAT](https://github.com/TGAC/KAT), [yak](https://github.com/lh3/yak), [merqury](https://github.com/marbl/merqury). I will leave you on your own to explore this.
+&ensp;**8\.3** The quality of an assembly may be assessed using Illumina whole genome sequencing data and kmer based methods. There are a few packages that can be used to carry out this step, such as [KAT](https://github.com/TGAC/KAT), [yak](https://github.com/lh3/yak), [merqury](https://github.com/marbl/merqury), and [quast](http://quast.sourceforge.net/quast). I will leave you on your own to explore this.
 
 
 &ensp;**8\.4** One other potential way to assess the quality of an assembly is to use transcriptome data, such as IsoSeq or regular mRNASeq data.
