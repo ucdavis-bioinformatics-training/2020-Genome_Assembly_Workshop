@@ -403,23 +403,23 @@ HiFi reads for this assembly were binned based on Illumina kmers.
 <img src="figures/busco_figure_drosophila.png" alt="busco_figure" width="60%"/>
 
 #### Assessment
-**Fly contigs:**
-* Very few missing or fragmented, some duplicates.
+**Flye contigs:**
+* Very few missing or fragmented, some duplicates. Flye (in HiFi mode) is either discarding or collapsing many of the haplotigs.
     
 **IPA_diploid_a:**
-* IPA doesn't do a great job of binning haplotids, so the accessory set is missing many of them.
+* These are the IPA accessory contigs before purging duplicates. Because IPA doesn't do a great job of binning haplotigs, the accessory set is missing many BUSCOs.
 
 **IPA_diploid_p:**
-* In the same way as IPA accessory contigs missing some genes, IPA primary contigs are excepted to have mostly complete BUSCOs but lots of duplicates. This is exactly what we see.
+* For the same reason that IPA accessory contigs are missing many BUSCOs, IPA primary contigs are excepted to have mostly complete BUSCOs but lots of duplicates. This is exactly what we see.
     
 **IPA_diploid_a+p:**
-* The combination of IPA_diploid_a + IPA_diploid_P (accessory and primary) contigs should result in fully complete, and mostly duplicated BUSCOs. This is exactly what we see.
+* The combination of IPA_diploid_a + IPA_diploid_p (accessory and primary) contigs should result in fully complete, and mostly duplicated BUSCOs. This is exactly what we see.
     
-**IPA_purged_a_ctg / IPA_purged_p_contig:**
-* These sets of contigs have had purge duplicates run on them. This should remove duplicated genes, resulting in sets of contigs that contain most BUSCOs in single copy.
-* This is mostly true, however the accessory set is missing a number, and also has a number of duplicates.
+**IPA_purged_a_ctg and IPA_purged_p_contig:**
+* These sets of contigs have had purge duplicates run on them. This should remove duplicated sequce, resulting in sets of contigs that contain most BUSCOs in single copy.
+* This is mostly true, however the accessory set is missing some, and also has a number of duplicates. Interestingly the total single copy BUSCOs (3206) + accessory duplicated BUSCOs sum to a larger number (3308) than the total number of BUSCOs in the set (3285).
     
-**IPA_trio-mat / IPA_trio-pat:**
+**IPA_trio-mat and IPA_trio-pat:**
 * For both of these contig sets, reads had been binned prior to assembly using the Trio binning approach. We would expect this binning to produce beautiful haploid assemblies. With some small exception, this is almost exactly what we see.
     
 **Shasta:**
