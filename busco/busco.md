@@ -400,7 +400,7 @@ HiFi reads for this assembly were binned based on Illumina kmers.
 
 1. Collate all of the statistics and compare the results. Which assembler did better? 
 
-<img src="figures/busco_figure_drosophila.png" alt="busco_figure" width="80%"/>
+<img src="figures/busco_figure_drosophila.png" alt="busco_figure" width="60%"/>
 
 #### Assessment
 **Fly contigs:**
