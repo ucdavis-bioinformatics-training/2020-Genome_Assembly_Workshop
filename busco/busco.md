@@ -1,4 +1,4 @@
-<center><a href="https://busco.ezlab.org/"><img src="figures/busco.png" alt="busco" width="20%" align="center"/></center></a>
+<img src="figures/busco.png" alt="busco" width="20%" align="center"/>
 
 ### Schedule
 *  1pm Intro and bacterial BUSCO hands on: 20 minutes
