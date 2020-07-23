@@ -63,7 +63,6 @@ BUSCO scores and contiguity as defined by N50 are not well correlated:
 
 [Simão et al. 2015](https://academic.oup.com/bioinformatics/article/31/19/3210/211866)
 
-
 ---------
 
 ### Hands on, Activating/Installing BUSCO
@@ -400,3 +399,28 @@ HiFi reads for this assembly were binned based on Illumina kmers.
 1. Go through the Slack threads for each group. Collect that BUSCO output paths for each different set of contigs.
 
 1. Collate all of the statistics and compare the results. Which assembler did better? 
+
+<img src="figures/busco_figure_drosophila.png" alt="busco_figure" width="80%"/>
+
+#### Assessment
+**Fly contigs:**
+* Very few missing or fragmented, some duplicates.
+    
+**IPA_diploid_a:**
+* IPA doesn't do a great job of binning haplotids, so the accessory set is missing many of them.
+
+**IPA_diploid_p:**
+* In the same way as IPA accessory contigs missing some genes, IPA primary contigs are excepted to have mostly complete BUSCOs but lots of duplicates. This is exactly what we see.
+    
+**IPA_diploid_a+p:**
+* The combination of IPA_diploid_a + IPA_diploid_P (accessory and primary) contigs should result in fully complete, and mostly duplicated BUSCOs. This is exactly what we see.
+    
+**IPA_purged_a_ctg / IPA_purged_p_contig:**
+* These sets of contigs have had purge duplicates run on them. This should remove duplicated genes, resulting in sets of contigs that contain most BUSCOs in single copy.
+* This is mostly true, however the accessory set is missing a number, and also has a number of duplicates.
+    
+**IPA_trio-mat / IPA_trio-pat:**
+* For both of these contig sets, reads had been binned prior to assembly using the Trio binning approach. We would expect this binning to produce beautiful haploid assemblies. With some small exception, this is almost exactly what we see.
+    
+**Shasta:**
+* Shasta is not designed for PacBio HiFi data and it shows. The Shasta assembly has the largest number of fragmented contigs, and is missinge a huge number of BUSCOs as well.

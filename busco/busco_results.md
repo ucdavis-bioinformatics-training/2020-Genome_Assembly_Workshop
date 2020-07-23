@@ -97,21 +97,68 @@ busco -f -c 20 -m genome \
 busco -f -c 40 -m genome \
     -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_mat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-mat --lineage_dataset diptera_odb10
 
+        --------------------------------------------------
+        |Results from dataset diptera_odb10               |
+        --------------------------------------------------
+        |C:98.7%[S:98.2%,D:0.5%],F:0.2%,M:1.1%,n:3285     |
+        |3241   Complete BUSCOs (C)                       |
+        |3226   Complete and single-copy BUSCOs (S)       |
+        |15     Complete and duplicated BUSCOs (D)        |
+        |8      Fragmented BUSCOs (F)                     |
+        |36     Missing BUSCOs (M)                        |
+        |3285   Total BUSCO groups searched               |
+        --------------------------------------------------
+
 
 
 # IPA primary contigs from Trio-binned Paternal assembly
-busco -f -c 40 -m genome \
--i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-pat --lineage_dataset diptera_odb10
+busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-pat --lineage_dataset diptera_odb10
+
+        --------------------------------------------------
+        |Results from dataset diptera_odb10               |
+        --------------------------------------------------
+        |C:99.6%[S:99.0%,D:0.6%],F:0.1%,M:0.3%,n:3285     |
+        |3273   Complete BUSCOs (C)                       |
+        |3252   Complete and single-copy BUSCOs (S)       |
+        |21     Complete and duplicated BUSCOs (D)        |
+        |2      Fragmented BUSCOs (F)                     |
+        |10     Missing BUSCOs (M)                        |
+        |3285   Total BUSCO groups searched               |
+        --------------------------------------------------
 
 
 
 # IPA primary contigs after purge_dups
 busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta  -o IPA_purged.p_ctg --lineage_dataset diptera_odb10
 
+        --------------------------------------------------
+        |Results from dataset diptera_odb10               |
+        --------------------------------------------------
+        |C:98.0%[S:97.6%,D:0.4%],F:0.2%,M:1.8%,n:3285     |
+        |3219   Complete BUSCOs (C)                       |
+        |3206   Complete and single-copy BUSCOs (S)       |
+        |13     Complete and duplicated BUSCOs (D)        |
+        |5      Fragmented BUSCOs (F)                     |
+        |61     Missing BUSCOs (M)                        |
+        |3285   Total BUSCO groups searched               |
+        --------------------------------------------------
+
 
 
 ## IPA accessory contigs after purge dup: 
 busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta -o IPA_purged.a_ctg --lineage_dataset diptera_odb10
+
+        --------------------------------------------------
+        |Results from dataset diptera_odb10               |
+        --------------------------------------------------
+        |C:82.8%[S:79.7%,D:3.1%],F:0.4%,M:16.8%,n:3285    |
+        |2721   Complete BUSCOs (C)                       |
+        |2619   Complete and single-copy BUSCOs (S)       |
+        |102    Complete and duplicated BUSCOs (D)        |
+        |12     Fragmented BUSCOs (F)                     |
+        |552    Missing BUSCOs (M)                        |
+        |3285   Total BUSCO groups searched               |
+        --------------------------------------------------
 
 
 
@@ -129,3 +176,6 @@ cp ./IPA_purged.a_ctg/short_summary.* ./short_summaries/
 
 
 python3 /share/workshop/genome_assembly/$USER/busco/generate_plot.py -wd ./short_summaries/
+
+
+scp gigantor:/share/workshop/genome_assembly/shunter/busco-testing/drosophila_test/short_summaries/busco_figure.png busco_figure_drosophila.png
