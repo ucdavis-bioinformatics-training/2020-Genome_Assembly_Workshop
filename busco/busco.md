@@ -66,14 +66,13 @@ BUSCO scores and contiguity as defined by N50 are not well correlated:
 
 ---------
 
-### Lets try it out on some assemblies!
+### Hands on, Activating/Installing BUSCO
 
-But first we need to set up BUSCO.
+First we need to set up BUSCO.
 
 #### Create an interactive session:
 ```bash
-srun -t 03:00:00 -c 20 -n 1 --mem 16000 --partition production \
-    --account genome_workshop --reservation genome_workshop --pty /bin/bash
+srun -t 03:00:00 -c 20 -n 1 --mem 16000 --partition production --account genome_workshop --reservation genome_workshop --pty /bin/bash
 aklog 
 source ~/.bashrc  # only necessary if you have a ~/.bashrc
 
@@ -156,9 +155,9 @@ conda install busco=4.0.6
 
 ----------
 
-### Now that Busco is activated/installed, lets try it out. 
+### Test BUSCO on a bacterial genome.
 
-First we need a genome to test on. Lets start with a small bacterial one.
+We need a genome to test on, lets start by assembling a small bacterial one.
 
 The following code block symlinks in some raw Illumina reads and does some basic read clean up with [HTStream](https://github.com/s4hts/HTStream/issues).
 
@@ -184,11 +183,11 @@ hts_Stats -A 01-HTS_Preproc/Bacteria.json -F -f 01-HTS_Preproc/Bacteria
 
 ```
 
-Next we assemble the cleaned reads with [Spades](http://cab.spbu.ru/software/spades/) and look at the assembly stats.
+Next we assemble the cleaned reads with [Spades](http://cab.spbu.ru/software/spades/) and look at the assembly statistics.
 
 ```bash
 module load spades/3.13.0
-spades.py -t 15 -1 01-HTS_Preproc/Bacteria_R1.fastq.gz -2 01-HTS_Preproc/Bacteria_R2.fastq.gz -o 02-SpadesAssembly
+spades.py -t 20 -1 01-HTS_Preproc/Bacteria_R1.fastq.gz -2 01-HTS_Preproc/Bacteria_R2.fastq.gz -o 02-SpadesAssembly
 
 module load assembly_stats/1.0.1
 
@@ -210,6 +209,7 @@ Gaps = 0
 
 <font color="red">Once you have successfully completed this step mark "Yes" in zoom. Post questions or problems to the Slack channel.</font>
 
+-------
 
 **Wow, an N50 of only 82Kb?**
 
@@ -238,10 +238,10 @@ busco -f -c 20 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto
         --------------------------------------------------
 ```
 
-This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Busco has identified it as part of the Mycoplasmatales family. The assembly looks like it captured almost all of the single copy genes. If we look into the Busco folders we can find some additional interesting information about the genome. Note that because this sample was a prokaryote Busco used [Prodigal](https://github.com/hyattpd/Prodigal) to do gene prediction instead of Augustus.
+This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Busco has identified it as part of the Mycoplasmatales family. The assembly looks like it captured almost all of the single copy genes. If we look into the Busco folders we can find some additional interesting information about the genome. Note that because this sample was a prokaryote Busco used, [Prodigal](https://github.com/hyattpd/Prodigal) to do gene prediction instead of Augustus.
 
 
-Alternatively we can also look through the BUSCO database and specify the lineage directly if we have a good identification for the sample, this will cause BUSCO to run more quickly:
+Rather than use BUSCO's auto-lineage selection, we can also look through the BUSCO database and specify the lineage directly if we have a good identification for the sample. This will cause BUSCO to run more quickly:
 
 ```bash
 busco --list-datasets
@@ -297,6 +297,8 @@ Additional assemblies were built with:
 1. Flye v2.7.1 using command:
     * python ./Flye/bin/flye -t 40 --pacbio-hifi ELF_19kb.m64001_190914_015449.Q20.28X.fasta --out-dir flyeasm
 
+Setup: 
+
 ```bash 
 cd /share/workshop/genome_assembly/$USER/busco/
 
@@ -328,7 +330,7 @@ cd drosophila_test
 ```
 
 
-#### Team 4: IPA primary vs IPA Secondary contigs after purge duplicates
+#### Team 4: IPA primary contigs vs IPA accessory contigs after purge duplicates
 
 ```
 /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta
