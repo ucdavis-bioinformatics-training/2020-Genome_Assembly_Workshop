@@ -107,8 +107,7 @@ busco -f -c 40 -m genome \
 busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta  -o IPA_purged.p_ctg --lineage_dataset diptera_odb10
 
 
+## IPA accessory contigs after purge dup: 
+busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta -o IPA_purged.a_ctg --lineage_dataset diptera_odb10
 
 
-/share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta
-
-/share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta

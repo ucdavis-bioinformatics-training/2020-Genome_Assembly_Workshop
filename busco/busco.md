@@ -310,6 +310,8 @@ cd drosophila_test
 
 #### Team 1: IPA primary contigs from Trio-binned Maternal assembly vs IPA Paternal assembly
 
+HiFi reads for this assembly were binned based on Illumina kmers.
+
 ```
 /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_mat_ipa_assembly/RUN/14-final/final.p_ctg.fasta
 /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta
