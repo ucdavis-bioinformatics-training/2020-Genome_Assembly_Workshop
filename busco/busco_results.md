@@ -79,6 +79,7 @@ busco -f -c 20 -m genome \
 
 busco -f -c 20 -m genome \
     -i /share/biocore/shunter/drosophila/flyeasm/assembly.fasta -o Flye_ctgs --lineage_dataset diptera_odb10
+
         --------------------------------------------------
         |Results from dataset diptera_odb10               |
         --------------------------------------------------
@@ -100,14 +101,31 @@ busco -f -c 40 -m genome \
 
 # IPA primary contigs from Trio-binned Paternal assembly
 busco -f -c 40 -m genome \
--i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-mat --lineage_dataset diptera_odb10
+-i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-pat --lineage_dataset diptera_odb10
 
 
-# IPA contigs after purge_dups vs IPA primary contigs
+
+# IPA primary contigs after purge_dups
 busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta  -o IPA_purged.p_ctg --lineage_dataset diptera_odb10
+
 
 
 ## IPA accessory contigs after purge dup: 
 busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta -o IPA_purged.a_ctg --lineage_dataset diptera_odb10
 
 
+
+
+mkdir -p short_summaries
+cp ./IPA_diploid_p_ctg/short_summary.* ./short_summaries/
+cp ./IPA_diploid_a_ctg/short_summary.* ./short_summaries/
+cp ./IPA_diploid_a+p_ctg/short_summary.* ./short_summaries/
+cp ./Shasta_ctgs/short_summary.* ./short_summaries/
+cp ./Flye_ctgs/short_summary.* ./short_summaries/ 
+cp ./IPA_trio-mat/short_summary.* ./short_summaries/
+cp ./IPA_trio-pat/short_summary.* ./short_summaries/
+cp ./IPA_purged.p_ctg/short_summary.* ./short_summaries/
+cp ./IPA_purged.a_ctg/short_summary.* ./short_summaries/
+
+
+python3 /share/workshop/genome_assembly/$USER/busco/generate_plot.py -wd ./short_summaries/
