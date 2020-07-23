@@ -83,6 +83,7 @@ source ~/.bashrc  # only necessary if you have a ~/.bashrc
 #### Option 1 Run BUSCO using modules 
 
 ```bash
+mkdir -p /share/workshop/genome_assembly/$USER/busco
 cd /share/workshop/genome_assembly/$USER/busco
 
 module load busco/4.0.2

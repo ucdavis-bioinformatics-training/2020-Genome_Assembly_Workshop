@@ -28,6 +28,15 @@ busco -f -c 20 -m genome \
     -o IPA_diploid_a_ctg --lineage_dataset diptera_odb10
 ```
 
+        ***** Results: *****
+
+        C:28.8%[S:28.6%,D:0.2%],F:0.6%,M:70.6%,n:3285      
+        947     Complete BUSCOs (C)                        
+        940     Complete and single-copy BUSCOs (S)        
+        7       Complete and duplicated BUSCOs (D)         
+        21      Fragmented BUSCOs (F)                      
+        2317    Missing BUSCOs (M)                         
+        3285    Total BUSCO groups searched    
 
 
 ## IPA_diploid_a+p
@@ -50,7 +59,7 @@ busco -f -c 20 -m genome -i ipa_diploid_a+p.fasta -o IPA_diploid_a+p_ctg --linea
         |3285   Total BUSCO groups searched               |
         --------------------------------------------------
 
-Shasta
+## Shasta
 
 busco -f -c 20 -m genome \
     -i /share/biocore/shunter/drosophila/ShastaRun/Assembly.fasta -o Shasta_ctgs --lineage_dataset diptera_odb10
@@ -66,7 +75,8 @@ busco -f -c 20 -m genome \
         |3285   Total BUSCO groups searched               |
         --------------------------------------------------
 
-Flye
+## Flye
+
 busco -f -c 20 -m genome \
     -i /share/biocore/shunter/drosophila/flyeasm/assembly.fasta -o Flye_ctgs --lineage_dataset diptera_odb10
         --------------------------------------------------
@@ -82,39 +92,23 @@ busco -f -c 20 -m genome \
         --------------------------------------------------
 
 
+# IPA primary contigs from Trio-binned Maternal assembly 
+busco -f -c 40 -m genome \
+    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_mat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-mat --lineage_dataset diptera_odb10
+
+
+
+# IPA primary contigs from Trio-binned Paternal assembly
+busco -f -c 40 -m genome \
+-i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_pat_ipa_assembly/RUN/14-final/final.p_ctg.fasta -o IPA_trio-mat --lineage_dataset diptera_odb10
+
+
+# IPA contigs after purge_dups vs IPA primary contigs
+busco -f -c 40 -m genome -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta  -o IPA_purged.p_ctg --lineage_dataset diptera_odb10
 
 
 
 
-1. Calculate BUSCO results for "a" contigs from IPA assembler:
-```bash
-busco -f -c 20 -m genome \
-    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.a_ctg.fasta \
-    -o IPA_diploid_a_ctg --lineage_dataset diptera_odb10
-```
+/share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.a_ctg.fasta
 
-2. Calculate BUSCO results for "p" contigs from IPA assembler:
-```bash
-busco -f -c 20 -m genome \
-    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.p_ctg.fasta \
-    -o IPA_diploid_p_ctg --lineage_dataset diptera_odb10
-```
-
-3. Calculate BUSCO results for "a" + "p" contigs from IPA assembler:
-```bash
-cat /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.*.fasta  > ipa_diploid_a+p.fasta
-
-busco -f -c 20 -m genome -i ipa_diploid_a+p.fasta -o IPA_diploid_a+p_ctg --lineage_dataset diptera_odb10
-```
-
-4. Calculate BUSCO results for Shasta assembler:
-```bash
-busco -f -c 20 -m genome \
-    -i /share/biocore/shunter/drosophila/ShastaRun/Assembly.fasta -o Shasta_ctgs --lineage_dataset diptera_odb10
-```
-
-5. Calculate BUSCO results for Flye assembler:
-```bash
-busco -f -c 20 -m genome \
-    -i /share/biocore/shunter/drosophila/flyeasm/assembly.fasta -o Flye_ctgs --lineage_dataset diptera_odb10
-```
+/share/workshop/genome_assembly/pacbio_2020_data_drosophila/purge_dup_asm/final.purged.p_ctg.fasta
