@@ -74,6 +74,10 @@ navigation:
   - title: Assembly using ONT - Hands-on
     url: ONT_Assembly/nanopore
 
+  - heading: Genome Assessment
+  - title: BUSCO
+    url: busco/busco
+
   - heading: ETC
   - title: Closing thoughts
     url: base/closing
