@@ -1,17 +1,57 @@
-## BUSCO
-
-[BUSCO](https://doi.org/10.1093/bioinformatics/btv351) is a popular software package for assessing genome assembly completeness using single copy orthologs. It has published in Oct 2015 and had 3486 citations as of July 2020!
+<center><a href="https://busco.ezlab.org/"><img src="figures/busco.png" alt="busco" width="20%" align="center"/></center></a>
 
 
+**Benchmarking Universal Single-Copy Orthologs**, [BUSCO](https://doi.org/10.1093/bioinformatics/btv351), is a popular software package for assessing genome/transcriptome assembly completeness using single copy orthologs. It was published in Oct 2015 and had 3486 citations as of July 2020 according to Google Scholar! [The authors](https://www.sib.swiss/evgeny-zdobnov-group) are also responsible for [OrthoDB](https://www.orthodb.org/), a large database of curated [orthologous genes](https://www.orthodb.org/orthodb_userguide.html#terminology). 
 
-How does it work?
+The BUSCO sets are collections of nearly universally distributed (90%) single-copy orthologous genes found within species at a specific phylogenetic level. Originally these sets represented arthropods, vertebrates, metazoans, fungi, and eukaryotes, but additional genome sequences have made it possible to create BUSCO sets at a finer scale.
 
-Busco Criticism
-    -
+These sets are determined by analysis of species in the OrthoDB database. [The theory](https://academic.oup.com/gbe/article/doi/10.1093/gbe/evq083/573552) is that genes belonging to these sets are evolving under "single-copy control" where something about their necessity and dosage constraints maintains them at a single copy within the genome.
 
-## 
+If a newly assembled genome or transcriptome is missing genes from the corresponding BUSCO set, something may have gone wrong with sequencing/assembly/annotation/etc, and other genes may also be missing.
+
+-----
+
+### How are BUSCOs made? <img src="figures/stork2.png" alt="busco_figure" width="30%" align="right"/>
+
+1. Selection: Single-copy orthologs present in at least 90% of species in a specific group are selected from OrthoDB.
+
+1. Model Building: Multiple sequence alignments of protein sequences from each BUSCO group are generated and used to build a hidden Markov model (HMM) for the group.
+
+1. Pruning: Sequences are then searched against the library of HMM profiles to remove any that cannot reliably distinguish members of their group from other sequences.
+
+1. Parameter Optimization: "expected-score" and "expected-length" classification cut-offs are calculated for each BUSCO group based on the distribution of HMM search scores and lengths for members of the group. These cut-offs well be used to classify new proteins as members of the group.
+
+1. Consensus sequences and Block profiles (position-specific frequency matrices) for each BUSCO are then created.
+
+
+-----
+
+### How are genomes/transcriptomes assessed?
+
+1. Consensus sequences for each BUSCO are searched against the genome sequence using tBLASTn. Regions containing potential BUSCOs are identified. Up to three candidate genomic regions can be identified for each BUSCO. 
+
+1. Candidate regions are extracted from the genome and [AUGUSTUS/Augustus](http://augustus.gobics.de/) in combination with the BUSCO block porfile is used for gene prediction. For transcriptomes,the protein prediction is used directly if available, otherwise the longest ORF within the transcript is used.
+
+1. Each predicted gene is then matched against the BUSCO group's HMM profile, sequences meeting the minimum alignment cut-off are considered orthologous.
+
+1. Orthologous sequences are then evaluated based on the expected-length cutoff. Sequences are classified as "Complete" if they meet the length cutoff, or "Fragmented" if too short. If multiple sequences meet the alignment and length cutoff they are classified as "Duplicated". Any BUSCO without Complete, Fragmented, or Duplicated sequence is "Missing".
+
+1. Finally, "Complete" sequences are used to build a new gene prediction model for Augustus. A second round of Augustus gene prediction is then performed on all BUSCO-matching candidate regions that did not yield a "Complete" ortholog. Classification is then carried out a second time on the new set of predicted genes.
+
+--------
+
+BUSCO scores and contiguity as defined by N50 are not well correlated:
+
+<img src="figures/Busco_vs_N50.png" alt="Busco_vs_N50" width="50%"/>
+
+[Simão et al. 2015](https://academic.oup.com/bioinformatics/article/31/19/3210/211866)
+
 
 ---------
+
+### Lets try it out on some assemblies!
+
+But first we need to set up BUSCO.
 
 #### Create an interactive session:
 ```bash
@@ -22,11 +62,9 @@ source ~/.bashrc
 
 ```
 
-### Get access to Busco:
+### Get access to BUSCO:
 
-#### Option 1
-
-Run Busco using modules 
+#### Option 1 Run BUSCO using modules 
 
 ```bash
 cd /share/workshop/genome_assembly/$USER/busco
@@ -43,17 +81,20 @@ cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/generate_plot.py /
 
 
 ```
+-------
 
-### Option 2 
+#### Option 2 Install BUSCO using Conda
 
-For patient people or for installing BUSCO on a system where no module is available.
+This option is for patient people or people who need to install BUSCO on a system where no module is available.
+
+*Note that if you go this route, you will not need to set environment variables or copy generate_plot.py as in Option 1.*
 
 ```bash
 mkdir -p /share/workshop/genome_assembly/$USER/busco
 cd /share/workshop/genome_assembly/$USER/busco
 ```
 
-#### Download miniconda:
+##### Download miniconda:
 
 See: https://docs.conda.io/en/latest/miniconda.html for more details
 
@@ -61,7 +102,7 @@ See: https://docs.conda.io/en/latest/miniconda.html for more details
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 
-#### Install it to your workshop folder:
+##### Install it to your workshop folder:
 
 ```bash
 sh Miniconda3-latest-Linux-x86_64.sh -b -p /share/workshop/genome_assembly/$USER/busco/miniconda
@@ -84,7 +125,7 @@ conda update --all
 
 #### Create a new environment and install Busco:
 
-Note that this step can take quite a while because Busco has a large number of dependencies. This set also sets the AUGUSTUS_CONFIG_PATH and BUSCO_CONFIG_FILE environment variables.
+Note that this step can take **a very long time** because Busco has a large number of dependencies. This set also sets the AUGUSTUS_CONFIG_PATH and BUSCO_CONFIG_FILE environment variables.
 
 ```bash
 conda create -n busco_env
@@ -94,9 +135,9 @@ conda install busco=4.0.6
 
 ----------
 
-Now that Busco is activated/installed, lets try it out. 
+#### Now that Busco is activated/installed, lets try it out. 
 
-First we need a genome to test on. lets start with a small bacterial one.
+First we need a genome to test on. Lets start with a small bacterial one.
 
 The following code block symlinks in some raw Illumina reads and does some basic read clean up with [HTStream](https://github.com/s4hts/HTStream/issues).
 
@@ -122,7 +163,7 @@ hts_Stats -A 01-HTS_Preproc/Bacteria.json -F -f 01-HTS_Preproc/Bacteria
 
 ```
 
-#### Assemble data with [Spades](http://cab.spbu.ru/software/spades/) and look at the assembly stats.
+Next we assemble the cleaned reads with [Spades](http://cab.spbu.ru/software/spades/) and look at the assembly stats.
 
 ```bash
 module load spades/3.13.0
@@ -146,19 +187,18 @@ N_count = 0
 Gaps = 0
 ```
 
+**Wow, an N50 of only 82Kb?**
 
-#### Run Busco in genome assessment mode
 
-We will use new features in V4: better support for bacteria and archaea, auto-lineage selection, and automated download of reference datasets (all of which are very nice!). To speed things up we can ask Busco to only search the prokaryotic lineage using --auto-lineage-prok.
+#### Run BUSCO in genome assessment mode
+
+We will use new features in BUSCO V4: better support for bacteria and archaea, auto-lineage selection, and automated download of reference datasets (all of which are very nice!). To speed things up we can ask Busco to only search the prokaryotic lineage using --auto-lineage-prok.
 
 ```bash 
 
 busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
 
 ```
-
-
-This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Busco has identified it as part of the Mycoplasmatales family. The assembly looks like it captured almost all of the single copy genes. If we look into the Busco folders we can find some additional interesting information about the genome. Note that because this sample was a prokaryote Busco used [Prodigal](https://github.com/hyattpd/Prodigal) to do gene prediction.
 
 ```
         --------------------------------------------------
@@ -174,7 +214,10 @@ This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Bu
         --------------------------------------------------
 ```
 
-Alternatively we can also look through the busco database and specify the lineage directly if we have a good identification for the sample:
+This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Busco has identified it as part of the Mycoplasmatales family. The assembly looks like it captured almost all of the single copy genes. If we look into the Busco folders we can find some additional interesting information about the genome. Note that because this sample was a prokaryote Busco used [Prodigal](https://github.com/hyattpd/Prodigal) to do gene prediction instead of Augustus.
+
+
+Alternatively we can also look through the BUSCO database and specify the lineage directly if we have a good identification for the sample:
 
 ```bash
 busco --list-datasets
@@ -183,45 +226,49 @@ busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco_lineag
 
 ```
 
-Finally we can generate the canonical Busco plot using the built in script, however we need to install the ggplot2 package first.
+Finally we can generate the canonical BUSCO plot using a script that comes with the BUSCO package. However we need to install the ggplot2 package in R first.
 
 Start R and run (answer yes to install the package to your personal library):
+
 ```R
 install.packages("ggplot2")
 q(save="no")
 ```
 
 Next copy the summary files and make the plot:
+
 ```bash
-mkdir short_summaries
+mkdir -p short_summaries
 cp ./03-Busco/short_summary.* ./short_summaries/ 
 cp ./03-Busco_lineage/short_summary.* ./short_summaries/
 python3 /share/workshop/genome_assembly/$USER/busco/generate_plot.py -wd ./short_summaries/
 
 ```
 
+<img src="figures/busco_figure.png" alt="busco_figure" width="80%"/>
+
+Note that each of the summary files has been incorporated in the plot. This may be helpful in comparing different assemblies.
+
 
 ---------
 
 
 
-Test Busco on the *Drosophila* HiFi assemblies.
+#### Test Busco on the *Drosophila* HiFi assemblies.
 
 
 ```bash 
 cd /share/workshop/genome_assembly/$USER/busco/
-cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/busco_config.ini /share/workshop/genome_assembly/$USER/busco/
-
-export BUSCO_CONFIG_FILE="/share/workshop/genome_assembly/$USER/busco/busco_config.ini"
 
 mkdir -p drosophila_test
 cd drosophila_test
 
 
+
 busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
 
 ```
-<img src="figures/busco_figure.png" alt="busco_figure" width="80%"/>
+
 
 
 
