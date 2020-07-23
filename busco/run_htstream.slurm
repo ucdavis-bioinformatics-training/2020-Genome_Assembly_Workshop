@@ -2,9 +2,11 @@
 
 #SBATCH --nodes=1
 #SBATCH --ntasks=24
-#SBATCH --time=120
+#SBATCH --time=10
 #SBATCH --mem=2000 # Memory pool for all cores (see also --mem-per-cpu)
 #SBATCH --partition=production
+#SBATCH --account genome_workshop
+#SBATCH --reservation genome_workshop
 #SBATCH --output=slurmout/cleaning_%A_%a.out # File to which STDOUT will be written
 #SBATCH --error=slurmout/cleaning_%A_%a.err # File to which STDERR will be written
 

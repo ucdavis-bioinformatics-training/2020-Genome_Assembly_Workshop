@@ -1,15 +1,30 @@
 ## BUSCO
 
-What is it?
+[BUSCO](https://doi.org/10.1093/bioinformatics/btv351) is a popular software package for assessing genome assembly completeness using single copy orthologs. It has published in Oct 2015 and had 3486 citations as of July 2020!
 
 
+
+How does it work?
+
+Busco Criticism
+    -
 
 ## 
 
 ---------
 
+#### Create an interactive session:
+```bash
+srun -t 03:00:00 -c 15 -n 1 --mem 8000 --partition production \
+    --account genome_workshop --reservation genome_workshop --pty /bin/bash
+aklog 
+source ~/.bashrc
 
-### Option 1
+```
+
+### Get access to Busco:
+
+#### Option 1
 
 Run Busco using modules 
 
@@ -18,31 +33,22 @@ cd /share/workshop/genome_assembly/$USER/busco
 
 module load busco/4.0.2
 
-cp -r /software/augustus/3.3.2/lssc0-linux/config.copy /share/workshop/genome_assembly/$USER/busco/config
-export AUGUSTUS_CONFIG_PATH=/share/workshop/genome_assembly/$USER/busco/config
+cp -r /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/augustus.config /share/workshop/genome_assembly/$USER/busco/
+export AUGUSTUS_CONFIG_PATH=/share/workshop/genome_assembly/$USER/busco/augustus.config
 
-cp /software/busco/4.0.2/lssc0-linux/config/config.ini /share/workshop/genome_assembly/$USER/busco/busco.config
+cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/busco_config.ini /share/workshop/genome_assembly/$USER/busco/
 export BUSCO_CONFIG_FILE=/share/workshop/genome_assembly/$USER/busco/busco.config
 
-busco --list-datasets
+cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/generate_plot.py /share/workshop/genome_assembly/$USER/busco/
+
 
 ```
 
-### Option 2 (for patient people)
+### Option 2 
 
-### Install BUSCO on a system where no module is available
-
-#### Create an interactive session:
-```bash
-srun -t 02:00:00 -c 4 -n 1 --mem 2000 --partition production --account genome_workshop --reservation genome_workshop --pty /bin/bash
-```
-
-#### Get access to home and customize environment
+For patient people or for installing BUSCO on a system where no module is available.
 
 ```bash
-aklog 
-source ~/.bashrc
-
 mkdir -p /share/workshop/genome_assembly/$USER/busco
 cd /share/workshop/genome_assembly/$USER/busco
 ```
@@ -55,7 +61,7 @@ See: https://docs.conda.io/en/latest/miniconda.html for more details
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 
-#### Install it to a specific folder:
+#### Install it to your workshop folder:
 
 ```bash
 sh Miniconda3-latest-Linux-x86_64.sh -b -p /share/workshop/genome_assembly/$USER/busco/miniconda
@@ -78,7 +84,7 @@ conda update --all
 
 #### Create a new environment and install Busco:
 
-Note that this can take quite a while because Busco has a large number of dependencies. 
+Note that this step can take quite a while because Busco has a large number of dependencies. This set also sets the AUGUSTUS_CONFIG_PATH and BUSCO_CONFIG_FILE environment variables.
 
 ```bash
 conda create -n busco_env
@@ -88,10 +94,14 @@ conda install busco=4.0.6
 
 ----------
 
+Now that Busco is activated/installed, lets try it out. 
 
-Now that Busco is activated/installed, lets try it out. First we need a genome to test on. lets start with a small bacterial one.
+First we need a genome to test on. lets start with a small bacterial one.
+
+The following code block symlinks in some raw Illumina reads and does some basic read clean up with [HTStream](https://github.com/s4hts/HTStream/issues).
 
 ```bash
+# NOTE: Create an interactive session on the cluster if you closed the previous one.
 cd /share/workshop/genome_assembly/$USER/busco
 mkdir -p bacterial_test
 cd bacterial_test
@@ -100,39 +110,118 @@ cd bacterial_test
 mkdir 00-RawData
 ln -s /share/biocore/shunter/bacteria/*.gz ./00-RawData/
 
-# Clean the reads up a little:
+# Clean reads:
 module load htstream/1.3.1
-
 mkdir -p 01-HTS_Preproc
 
 hts_Stats -L 01-HTS_Preproc/Bacteria.json -1 00-RawData/Bacteria_R1.fastq.gz -2 00-RawData/Bacteria_R2.fastq.gz | \
+hts_SuperDeduper -A 01-HTS_Preproc/Bacteria.json | \
 hts_SeqScreener -A 01-HTS_Preproc/Bacteria.json | \
 hts_AdapterTrimmer -A 01-HTS_Preproc/Bacteria.json | \
-hts_SuperDeduper -A 01-HTS_Preproc/Bacteria.json | \
 hts_Stats -A 01-HTS_Preproc/Bacteria.json -F -f 01-HTS_Preproc/Bacteria
 
-
-mkdir slurmout
-cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/run_htstream.slurm .
-
-sbatch -J hts.${USER} run_htstream.slurm
-
 ```
 
+#### Assemble data with [Spades](http://cab.spbu.ru/software/spades/) and look at the assembly stats.
+
+```bash
 module load spades/3.13.0
-spades.py -t 40 -1 Bacteria_R1.fastq -2 Bacteria_R2.fastq -o test
+spades.py -t 15 -1 01-HTS_Preproc/Bacteria_R1.fastq.gz -2 01-HTS_Preproc/Bacteria_R2.fastq.gz -o 02-SpadesAssembly
+
+module load assembly_stats/1.0.1
+
+assembly_stats ./02-SpadesAssembly/contigs.fasta
+```
+
+```
+stats for ./02-SpadesAssembly/contigs.fasta
+sum = 1113800, n = 60, ave = 18563.33, largest = 389847
+N50 = 82313, n = 3
+N60 = 75116, n = 5
+N70 = 54132, n = 6
+N80 = 37018, n = 9
+N90 = 12161, n = 15
+N100 = 128, n = 60
+N_count = 0
+Gaps = 0
+```
 
 
+#### Run Busco in genome assessment mode
+
+We will use new features in V4: better support for bacteria and archaea, auto-lineage selection, and automated download of reference datasets (all of which are very nice!). To speed things up we can ask Busco to only search the prokaryotic lineage using --auto-lineage-prok.
+
+```bash 
+
+busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
 
 ```
 
 
+This isolate had previously been identified as *Mycoplasma ovipneumoniae* and Busco has identified it as part of the Mycoplasmatales family. The assembly looks like it captured almost all of the single copy genes. If we look into the Busco folders we can find some additional interesting information about the genome. Note that because this sample was a prokaryote Busco used [Prodigal](https://github.com/hyattpd/Prodigal) to do gene prediction.
+
+```
+        --------------------------------------------------
+        |Results from dataset mycoplasmatales_odb10       |
+        --------------------------------------------------
+        |C:98.9%[S:98.3%,D:0.6%],F:1.1%,M:0.0%,n:174      |
+        |172    Complete BUSCOs (C)                       |
+        |171    Complete and single-copy BUSCOs (S)       |
+        |1      Complete and duplicated BUSCOs (D)        |
+        |2      Fragmented BUSCOs (F)                     |
+        |0      Missing BUSCOs (M)                        |
+        |174    Total BUSCO groups searched               |
+        --------------------------------------------------
+```
+
+Alternatively we can also look through the busco database and specify the lineage directly if we have a good identification for the sample:
+
+```bash
+busco --list-datasets
+
+busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco_lineage --lineage_dataset mycoplasmatales_odb10
+
+```
+
+Finally we can generate the canonical Busco plot using the built in script, however we need to install the ggplot2 package first.
+
+Start R and run (answer yes to install the package to your personal library):
+```R
+install.packages("ggplot2")
+q(save="no")
+```
+
+Next copy the summary files and make the plot:
+```bash
+mkdir short_summaries
+cp ./03-Busco/short_summary.* ./short_summaries/ 
+cp ./03-Busco_lineage/short_summary.* ./short_summaries/
+python3 /share/workshop/genome_assembly/$USER/busco/generate_plot.py -wd ./short_summaries/
+
+```
+
+
+---------
 
 
 
+Test Busco on the *Drosophila* HiFi assemblies.
 
 
+```bash 
+cd /share/workshop/genome_assembly/$USER/busco/
+cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/busco_config.ini /share/workshop/genome_assembly/$USER/busco/
 
+export BUSCO_CONFIG_FILE="/share/workshop/genome_assembly/$USER/busco/busco_config.ini"
+
+mkdir -p drosophila_test
+cd drosophila_test
+
+
+busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
+
+```
+<img src="figures/busco_figure.png" alt="busco_figure" width="80%"/>
 
 
 
