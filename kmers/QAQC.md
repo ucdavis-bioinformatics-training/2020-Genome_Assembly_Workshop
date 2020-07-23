@@ -68,7 +68,7 @@ We also encourage:
 
 ### genometools seqstat
 
-We can use genometools to get a number of assembly stats. In order to get NG50 values we need to provide it the estimate of the genome size determined by genomescope.
+We can use [genometools](http://genometools.org/) to get a number of assembly stats. In order to get NG50 values we need to provide it the estimate of the genome size determined by genomescope.
 
 ```bash
 mkdir genometools
@@ -137,15 +137,8 @@ gt seqstat -contigs -genome 135000000 /share/workshop/genome_assembly/pacbio_202
 
 ### MERQURY
 
-Merqury got alot of its inspiration from [KAT K-mer Analysis Toolkit](https://kat.readthedocs.io/en/latest/using.html)
+[Merqury](https://github.com/marbl/merqury) got alot of its inspiration from [KAT K-mer Analysis Toolkit](https://kat.readthedocs.io/en/latest/using.html)
 First we need some dependancies. Gonzalo Garcia from the Earlham Institute in the UK contributed to the last Genome Assembly workshop in 2018 discussing k-mers and KAT. Can see his materials [here](https://ucdavis-bioinformatics-training.github.io/2018-Dec-Genome-Assembly/).
-
-Merqury
-
-R requires
-Loading required package: argparse
-Loading required package: ggplot2
-Loading required package: scales
 
 ```bash
 mkdir merqury_drosophila
@@ -188,3 +181,57 @@ less merqury.sh
 ./merqury.sh pacbio.meryl final.purged.p_ctg.fasta final.purged.a_ctg.fasta merqury_pacbio
 # Took about an hour
 ```
+
+
+### spectra_cn and spectra_asm plots
+
+**spectra_cn**  
+We can count the canonical k-mers observed in the assembly and in the accurate, whole-genome read set (Here the original PacBio HiFi reads). A typical k-mer spectrum for a heterozygous diploid genome consists of two primary peaks, one representing k-mers that are 1-copy in the diploid genome (heterozygous, on a single haplotype) and one representing those that are 2-copy in the diploid genome (homozygous, on both haplotypes or two copies on one haplotype). The 2-copy k-mers appear with a frequency approximately equal to the average depth of sequencing coverage, where the 1-copy k-mers appear with frequency approximately equal to half the sequencing coverage. Using the multiplicity of the k-mer counts, and modeling the k-mer survival rate (i.e. how many k-mers are unaffected by sequencing error), it is possible to predict the size and repeat content of a genome from the k-mer spectrum alone.
+
+**spectra_asm**   
+Similar to the spectra-cn analysis, we can color each k-mer in the read set by the assembly in which it is found. This becomes useful when two haploid assemblies are evaluated. This way, we can detect k-mers that are present only in one assembly, k-mers shared in both assemblies, and k-mers not present in the assembly and only found in the read set.
+
+<p float="center">
+  <img src="figures/pacbio.merqury.spectra-cn.fl.png" width="45%" />
+  <img src="figures/pacbio.merqury.spectra-asm.fl.png" width="45%" />
+</p>
+
+file -> merqury_pacbio.spectra-cn.fl.png  
+file -> merqury_pacbio.spectra-asm.fl.png  
+<p float="center">
+  <img src="figures/merqury_pacbio.spectra-cn.fl.png" width="45%" />
+  <img src="figures/merqury_pacbio.spectra-asm.fl.png" width="45%" />
+</p>
+
+### QV values
+
+We can also use k-mers to estimate the frequency of consensus errors in the assembly. We use a binomial model of k-mer survival, and assume all k-mers in the assembly should be found at least once in the read set. In brief, we estimate the probability P that a base in the assembly is correct.
+
+file -> merqury_pacbio.qv
+
+
+| Assembly | ASM_ONLY | TOTAL | QV | ERROR |
+|:---|---|---|----|---|
+|final.purged.p_ctg | 4924 | 134184714 | 57.576 | 1.74744e-06 |
+|final.purged.a_ctg | 10189 | 115249809 | 53.7571 | 4.21008e-06 |
+|Both | 15113 | 249434523 | 55.3981 | 2.88528e-06 |
+
+
+### K-mer completeness
+
+We define a “reliable k-mer” as a k-mer that is truly in the genome and unlikely to be caused by sequencing error. With exact k-mer counts, it is easy to filter out low-copy k-mers that are likely to represent sequencing errors. The k-mer completeness is calculated as the fraction of reliable k-mers in the read set that are also found in the assembly.
+
+file -> completeness.stats
+
+| Assembly | all | ASM | TOTAL |
+|:---|---|---|----|
+|final.purged.p_ctg | all | 116624064 | 131494201 | 88.6914
+|final.purged.a_ctg | all | 97678031 | 131494201 | 74.2831
+|both | all | 128428935 | 131494201 | 97.6689
+
+
+## Excercise
+
+1. Given all the above what is the final X.Y.Q Assessment for this assembly.
+
+1. Run the above excercise for each of the final resulting assemblies we've performed in this workshop, post the X.Y.Q Assessment in the Slack channel.

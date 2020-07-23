@@ -1,10 +1,5 @@
 # Closing Thoughts
 
-**The forest through the trees.**
-
-<img src="" alt="flowchart_genome.png" width="600px"/>
-
-
 ## Prerequisites for bioinformatics
 
 * Access to a multi-core (24 cpu or greater), ‘high’ memory 64Gb or greater Linux server.
