@@ -273,32 +273,8 @@ cd /share/workshop/genome_assembly/$USER/busco/
 
 mkdir -p drosophila_test
 cd drosophila_test
-
-# Calculate BUSCO results for "a" contigs from IPA assembler:
-busco -f -c 15 -m genome \
-    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.a_ctg.fasta \
-    -o IPA_diploid_a_ctg --lineage_dataset diptera_odb10
-
-# Calculate BUSCO results for "p" contigs from IPA assembler:
-busco -f -c 15 -m genome \
-    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.p_ctg.fasta \
-    -o IPA_diploid_p_ctg --lineage_dataset diptera_odb10
-
-# Calculate BUSCO results for "a" + "p" contigs from IPA assembler:
-cat /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.*.fasta  > ipa_diploid_a+p.fasta
-
-busco -f -c 15 -m genome -i ipa_diploid_a+p.fasta -o IPA_diploid_a+p_ctg --lineage_dataset diptera_odb10
-
-# Calculate BUSCO results for Shasta assembler:
-busco -f -c 15 -m genome \
-    -i /share/biocore/shunter/drosophila/ShastaRun/Assembly.fasta -o Shasta_ctgs --lineage_dataset diptera_odb10
-
-TODO: # Calculate BUSCO results for Flye assembler:
-busco -f -c 15 -m genome \
-    -i /share/biocore/shunter/drosophila/ -o Flye_ctgs --lineage_dataset diptera_odb10
-
-
 ```
+
 
 
 Next copy the summary files and make the plot:
