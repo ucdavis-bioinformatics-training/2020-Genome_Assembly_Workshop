@@ -85,6 +85,8 @@ navigation:
   - heading: Genome Assessment
   - title: BUSCO
     url: busco/busco
+  - title: Additional QA/QC and metrics
+    url: kmers/QAQC
 
   - heading: ETC
   - title: Closing thoughts
