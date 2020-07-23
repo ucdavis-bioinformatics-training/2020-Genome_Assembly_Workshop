@@ -99,7 +99,7 @@ busco --help
 
 ```
 
-<font color="red">Once you have successfully run ```busco --help``` mark "Yes" in zoom. Post questions or problems to the Slack channel.</font>
+<font color="red">Once you have successfully run `busco --help` mark "Yes" in zoom. Post questions or problems to the Slack channel.</font>
 
 -------
 
