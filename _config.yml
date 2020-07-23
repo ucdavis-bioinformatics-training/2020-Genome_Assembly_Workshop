@@ -78,6 +78,10 @@ navigation:
   - title: Optical mapping for accurate genome assembly, comparative genomics, and haplotype segregation
     url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/UCD_genome_assembly_workshop_Hastie_Bionano.pdf
 
+  - heading: Phase Genomics
+  - title: Using Proximity to Fix Assembly
+    url: https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/assembly/200723_Sullivan_UCDavis_AsmWorkshop.pdf
+
   - heading: ETC
   - title: Closing thoughts
     url: base/closing
