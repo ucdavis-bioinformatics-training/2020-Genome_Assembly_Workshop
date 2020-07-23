@@ -286,7 +286,7 @@ Note that each of the summary files has been incorporated in the plot. This may 
 
 ## <font color="red">First, exit your srun session if you haven't already. We will need all of the cluster resources for the next step.</font>
 
-### Stop until ```squeue --reservation genome_workshop``` is empty
+### Stop until `squeue --reservation genome_workshop` is empty
 
 -------
 
