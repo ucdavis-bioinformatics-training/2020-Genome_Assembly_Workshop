@@ -55,7 +55,7 @@ But first we need to set up BUSCO.
 
 #### Create an interactive session:
 ```bash
-srun -t 03:00:00 -c 15 -n 1 --mem 8000 --partition production \
+srun -t 03:00:00 -c 20 -n 1 --mem 16000 --partition production \
     --account genome_workshop --reservation genome_workshop --pty /bin/bash
 aklog 
 source ~/.bashrc
@@ -75,7 +75,7 @@ cp -r /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/augustus.config
 export AUGUSTUS_CONFIG_PATH=/share/workshop/genome_assembly/$USER/busco/augustus.config
 
 cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/busco_config.ini /share/workshop/genome_assembly/$USER/busco/
-export BUSCO_CONFIG_FILE=/share/workshop/genome_assembly/$USER/busco/busco.config
+export BUSCO_CONFIG_FILE=/share/workshop/genome_assembly/$USER/busco/busco_config.ini
 
 cp /share/biocore/shunter/2020-Genome_Assembly_Workshop/busco/generate_plot.py /share/workshop/genome_assembly/$USER/busco/
 
@@ -196,7 +196,7 @@ We will use new features in BUSCO V4: better support for bacteria and archaea, a
 
 ```bash 
 
-busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
+busco -f -c 20 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
 
 ```
 
@@ -222,7 +222,7 @@ Alternatively we can also look through the BUSCO database and specify the lineag
 ```bash
 busco --list-datasets
 
-busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco_lineage --lineage_dataset mycoplasmatales_odb10
+busco -f -c 20 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco_lineage --lineage_dataset mycoplasmatales_odb10
 
 ```
 
@@ -235,7 +235,7 @@ install.packages("ggplot2")
 q(save="no")
 ```
 
-Next copy the summary files and make the plot:
+Next, copy the summary files and make the plot:
 
 ```bash
 mkdir -p short_summaries
@@ -256,6 +256,17 @@ Note that each of the summary files has been incorporated in the plot. This may 
 
 #### Test Busco on the *Drosophila* HiFi assemblies.
 
+Additional assemblies were built with:
+1. Shasta version 0.5.1 using command:
+    * shasta --input ELF_19kb.m64001_190914_015449.Q20.28X.fasta
+1. Flye v2.7.1 using command:
+    * python ./Flye/bin/flye -t 40 --pacbio-hifi ELF_19kb.m64001_190914_015449.Q20.28X.fasta --out-dir flyeasm
+
+Note that we will be using the "diptera_odb10" reference since _Drosophila melanogaster_ is in order _Diptera_.
+
+
+**EXTRA CREDIT**: calculate assembly statistics for each of the following sets of contigs. Given that the haploid genome size is 139.5Mb with three autosomes and a sex chromosome, what are your guesses about the BUSCO results?
+
 
 ```bash 
 cd /share/workshop/genome_assembly/$USER/busco/
@@ -263,15 +274,45 @@ cd /share/workshop/genome_assembly/$USER/busco/
 mkdir -p drosophila_test
 cd drosophila_test
 
+# Calculate BUSCO results for "a" contigs from IPA assembler:
+busco -f -c 15 -m genome \
+    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.a_ctg.fasta \
+    -o IPA_diploid_a_ctg --lineage_dataset diptera_odb10
 
+# Calculate BUSCO results for "p" contigs from IPA assembler:
+busco -f -c 15 -m genome \
+    -i /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.p_ctg.fasta \
+    -o IPA_diploid_p_ctg --lineage_dataset diptera_odb10
 
-busco -f -c 15 -m genome -i ./02-SpadesAssembly/contigs.fasta -o 03-Busco --auto-lineage-prok
+# Calculate BUSCO results for "a" + "p" contigs from IPA assembler:
+cat /share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_diploid_ipa_assembly/RUN/14-final/final.*.fasta  > ipa_diploid_a+p.fasta
+
+busco -f -c 15 -m genome -i ipa_diploid_a+p.fasta -o IPA_diploid_a+p_ctg --lineage_dataset diptera_odb10
+
+# Calculate BUSCO results for Shasta assembler:
+busco -f -c 15 -m genome \
+    -i /share/biocore/shunter/drosophila/ShastaRun/Assembly.fasta -o Shasta_ctgs --lineage_dataset diptera_odb10
+
+TODO: # Calculate BUSCO results for Flye assembler:
+busco -f -c 15 -m genome \
+    -i /share/biocore/shunter/drosophila/ -o Flye_ctgs --lineage_dataset diptera_odb10
+
 
 ```
 
 
+Next copy the summary files and make the plot:
+
+```bash
+mkdir -p short_summaries
+cp ./03-Busco/short_summary.* ./short_summaries/ 
+cp ./03-Busco_lineage/short_summary.* ./short_summaries/
+python3 /share/workshop/genome_assembly/$USER/busco/generate_plot.py -wd ./short_summaries/
+
+```
 
 
+/share/workshop/genome_assembly/pacbio_2020_data_drosophila/hifi_long_read_data
 
 
 
