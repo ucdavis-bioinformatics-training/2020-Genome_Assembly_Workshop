@@ -12,12 +12,13 @@ aklog
 The VGP and EBP has published a set of [Draft](https://www.earthbiogenome.org/standards-1/2020/7/9/assembly-standards-sequencing-and-assembly-subcommittee) Assembly Statistics to aspire to.
 
 They propose six broad quality categories (see table below)
-    * Continuity
-    * Structural accuracy
-    * Base accuracy
-    * Haplotype phasing
-    * Functional completeness
-    * Chromosome status
+
+* Continuity
+* Structural accuracy
+* Base accuracy
+* Haplotype phasing
+* Functional completeness
+* Chromosome status
 
 <img src="figures/quality_metrics.png" alt="quality_metrics" width="80%"/>
 
@@ -208,7 +209,6 @@ file -> merqury_pacbio.spectra-asm.fl.png
 We can also use k-mers to estimate the frequency of consensus errors in the assembly. We use a binomial model of k-mer survival, and assume all k-mers in the assembly should be found at least once in the read set. In brief, we estimate the probability P that a base in the assembly is correct.
 
 file -> merqury_pacbio.qv
-
 
 | Assembly | ASM_ONLY | TOTAL | QV | ERROR |
 |:---|---|---|----|---|
